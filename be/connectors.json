@@ -1,0 +1,19 @@
+{ "connectors": [
+        { 
+           "id": "connector1",
+           "sourceID": "Start", "targetID": "Init" 
+         },
+       {
+          "id": "connector3", "sourceID": "Condition", "targetID": "Print",
+          "annotations": [{ "content": "Yes" }]
+        },
+        {
+          "id": "connector4", "sourceID": "Condition", "targetID": "End",  
+          "annotations": [{ "content": "No" }]
+        },
+        { "id": "connector5", "sourceID": "Print", "targetID": "Increment" },
+        {
+          "id": "connector6", "sourceID": "Increment", "targetID": "Condition",  
+        }
+]
+}

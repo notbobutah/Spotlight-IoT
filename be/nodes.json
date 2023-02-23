@@ -1,0 +1,25 @@
+{
+    "nodes": [
+     { 
+         "id": "Start", "offsetY": 50, "annotations": [{ "content": "Start" }], 
+         "shape": { "type": "Flow", "shape": "Terminator" } 
+      },
+      {
+         "id": "Init", "offsetY": 150, "annotations": [{ "content": "var i = 0;" }],
+          "shape": { "type": "Flow", "shape": "Process" } 
+       },
+      {
+          "id": "Condition", "offsetY": 250, "annotations": [{ "content": "i < 10?" }], "shape": { "type": "Flow", "shape": "Decision" },
+          
+        },
+        { "id": "Print", "offsetY": 350, "annotations": [{ "content": "print(\"Hello!!\");" }], "shape": { "type": "Flow", "shape": "PreDefinedProcess" } },
+        {
+          "id": "Increment", "offsetY": 450, "annotations": [{ "content": "i++;" }], "shape": { "type": "Flow", "shape": "Process" },
+          
+        },
+        {
+          "id": "End", "offsetY": 550, "annotations": [{ "content": "End" }], "shape": { "type": "Flow", "shape": "Terminator" },
+         
+        },
+    ]
+}

@@ -1,0 +1,274 @@
+swagger: "2.0"
+info:
+  description: "Swagger API specification file for process SpotLight flow diagram."
+  version: "1.0.0"
+  title: "SpotLight PaaS Flow Diagram"
+  termsOfService: "NA"
+  contact:
+    email: "rrmackay@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost"
+basePath: "/api/v1"
+schemes:
+- "https"
+- "http"
+paths:
+  /node:
+    post:
+      tags:
+      - "Node"
+      summary: "Add a new node to the database"
+      description: ""
+      operationId: "addNode"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "NodeModel object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Node"
+      responses:
+        405:
+          description: "Invalid input"
+      security:
+      - nodediagram_auth:
+        - "write:nodes"
+        - "read:nodes"
+    put:
+      tags:
+      - "Node"
+      summary: "Update an existing Node"
+      description: ""
+      operationId: "updateNode"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Node object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Node"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Node not found"
+        405:
+          description: "Validation exception"
+      security:
+      - nodediagram_auth:
+        - "write:nodes"
+        - "read:nodes"
+    get:
+      tags:
+      - "Node"
+      summary: "get all nodes"
+      description: "Returns an array pf Nodes"
+      operationId: "getNodes"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Node"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Node not found"
+      security:
+      - api_key: []
+  /node/{NodeId}:
+    get:
+      tags:
+      - "Node"
+      summary: "Find Node by ID"
+      description: "Returns a single Node"
+      operationId: "getNodeById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "NodeId"
+        in: "path"
+        description: "ID of Node to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Node"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Node not found"
+      security:
+      - api_key: []
+  /connector:
+    post:
+      tags:
+      - "Connector"
+      summary: "Add a new connector to the database"
+      description: ""
+      operationId: "addconnector"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "connectorModel object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Connector"
+      responses:
+        405:
+          description: "Invalid input"
+      security:
+      - nodediagram_auth:
+        - "write:connectors"
+        - "read:connectors"
+    put:
+      tags:
+      - "Connector"
+      summary: "Update an existing connector"
+      description: ""
+      operationId: "updateconnector"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "connector object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Connector"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "connector not found"
+        405:
+          description: "Validation exception"
+      security:
+      - nodediagram_auth:
+        - "write:connectors"
+        - "read:connectors"
+    get:
+      tags:
+      - "Connector"
+      summary: "get all connectors"
+      description: "Returns an array pf connectors"
+      operationId: "getconnectors"
+      produces:
+      - "application/xml"
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Connector"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "connector not found"
+      security:
+      - api_key: []
+  /connector/{connectorId}:
+    get:
+      tags:
+      - "Connector"
+      summary: "Find connector by ID"
+      description: "Returns a single connector"
+      operationId: "getconnectorById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "connectorId"
+        in: "path"
+        description: "ID of connector to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Connector"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "connector not found"
+      security:
+      - api_key: []      
+securityDefinitions:
+  nodediagram_auth:
+    type: "oauth2"
+    authorizationUrl: "http://Nodediagram.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:nodes: "modify node in your account"
+      read:nodes: "read your node"
+      write:connectors: "modify node in your account"
+      read:connectors: "read your node"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Node:
+    type: "object"
+    properties:
+      id:
+        type: string
+      offsetY: 
+        type: number
+      offsetX: 
+        type: number
+      content: 
+        type: string
+      shape_type: 
+        type: string
+      shape_name: 
+        type: string 
+  Connector:
+    type: "object"
+    properties:
+      id: 
+        type: string
+      sourceID: 
+        type: string
+      targetID:
+        type: string
+      content:
+        type: string
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"

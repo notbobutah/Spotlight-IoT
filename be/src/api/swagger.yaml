@@ -1,0 +1,423 @@
+---
+swagger: "2.0"
+info:
+  description: "Swagger API specification file for process SpotLight flow diagram."
+  version: "1.0.0"
+  title: "SpotLight PaaS Flow Diagram"
+  termsOfService: "NA"
+  contact:
+    email: "rrmackay@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/api/v1"
+schemes:
+- "http"
+paths:
+  /diagram:
+    get:
+      tags:
+      - "Diagram"
+      summary: "list of diagrams name and ID"
+      description: "Returns an array of Diagrams meta data"
+      operationId: "getDiagrams"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Diagram"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Diagram not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "Diagram"
+    post:
+      tags:
+      - "Diagram"
+      summary: "Add a new diagram to the database"
+      description: ""
+      operationId: "addDiagram"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "DiagramModel object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Diagram"
+      responses:
+        "405":
+          description: "Invalid input"
+      security:
+      - nodediagram_auth:
+        - "write:nodes"
+        - "read:nodes"
+      x-swagger-router-controller: "Diagram"
+  /diagram/{DiagramId}:      
+    put:
+      tags:
+      - "Diagram"
+      summary: "Update an existing Diagram"
+      description: ""
+      operationId: "updateDiagram"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "DiagramId"
+        in: "path"
+        description: "ID of Diagram to update"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "Diagram object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Diagram"
+      responses:
+        "200":
+          description: "ok"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Diagram not found"
+      security:
+      - nodediagram_auth:
+        - "write:nodes"
+        - "read:nodes"
+      x-swagger-router-controller: "Diagram"
+    get:
+      tags:
+      - "Diagram"
+      summary: "Find Diagram by ID"
+      description: "Returns a single Diagram"
+      operationId: "getDiagramById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "DiagramId"
+        in: "path"
+        description: "ID of Diagram to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Diagram"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Diagram not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "Diagram"
+  /node:
+    get:
+      tags:
+      - "Node"
+      summary: "get all nodes"
+      description: "Returns an array pf Nodes"
+      operationId: "getNodes"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Node"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Node not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "Node"
+    post:
+      tags:
+      - "Node"
+      summary: "Add a new node to the database"
+      description: ""
+      operationId: "addNode"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "NodeModel object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Node"
+      responses:
+        "405":
+          description: "Invalid input"
+      security:
+      - nodediagram_auth:
+        - "write:nodes"
+        - "read:nodes"
+      x-swagger-router-controller: "Node"
+  /node/{NodeId}:      
+    put:
+      tags:
+      - "Node"
+      summary: "Update an existing Node"
+      description: ""
+      operationId: "updateNode"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "NodeId"
+        in: "path"
+        description: "ID of Node to update"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "Node object that needs to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Node"
+      responses:
+        "200":
+          description: "ok"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Node not found"
+      security:
+      - nodediagram_auth:
+        - "write:nodes"
+        - "read:nodes"
+      x-swagger-router-controller: "Node"
+    get:
+      tags:
+      - "Node"
+      summary: "Find Node by ID"
+      description: "Returns a single Node"
+      operationId: "getNodeById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "NodeId"
+        in: "path"
+        description: "ID of Node to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Node"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Node not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "Node"
+  /connector:
+    get:
+      tags:
+      - "Connector"
+      summary: "get all connectors"
+      description: "Returns an array pf connectors"
+      operationId: "getconnectors"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Connector"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "connector not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "Connector"
+    post:
+      tags:
+      - "Connector"
+      summary: "Add a new connector to the database"
+      description: ""
+      operationId: "addconnector"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "connectorModel object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Connector"
+      responses:
+        "405":
+          description: "Invalid input"
+      security:
+      - nodediagram_auth:
+        - "write:connectors"
+        - "read:connectors"
+      x-swagger-router-controller: "Connector"
+    put:
+      tags:
+      - "Connector"
+      summary: "Update an existing connector"
+      description: ""
+      operationId: "updateconnector"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "connector object that needs to be added to the diagram"
+        required: true
+        schema:
+          $ref: "#/definitions/Connector"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "connector not found"
+        "405":
+          description: "Validation exception"
+      security:
+      - nodediagram_auth:
+        - "write:connectors"
+        - "read:connectors"
+      x-swagger-router-controller: "Connector"
+  /connector/{connectorId}:
+    get:
+      tags:
+      - "Connector"
+      summary: "Find connector by ID"
+      description: "Returns a single connector"
+      operationId: "getconnectorById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "connectorId"
+        in: "path"
+        description: "ID of connector to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Connector"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "connector not found"
+      security:
+      - api_key: []
+      x-swagger-router-controller: "Connector"
+securityDefinitions:
+  nodediagram_auth:
+    type: "oauth2"
+    authorizationUrl: "http://Nodediagram.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:nodes: "modify node in your account"
+      read:nodes: "read your node"
+      write:connectors: "modify node in your account"
+      read:connectors: "read your node"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Diagram:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      name:
+        type: "string"
+      content:
+        type: "string"
+    example:
+      name: "diagram_name"
+      id: "id"
+      content: "content"
+  Node:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      offsetY:
+        type: "number"
+      offsetX:
+        type: "number"
+      content:
+        type: "string"
+      shape_type:
+        type: "string"
+      shape_name:
+        type: "string"
+    example:
+      offsetX: 6.02745618307040320615897144307382404804229736328125
+      offsetY: 0.80082819046101150206595775671303272247314453125
+      shape_name: "shape_name"
+      shape_type: "shape_type"
+      id: "id"
+      content: "content"
+  Connector:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      sourceID:
+        type: "string"
+      targetID:
+        type: "string"
+      content:
+        type: "string"
+    example:
+      sourceID: "sourceID"
+      targetID: "targetID"
+      id: "id"
+      content: "content"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"

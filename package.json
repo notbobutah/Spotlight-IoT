@@ -1,0 +1,21 @@
+{
+  "name": "spotlight-2.1",
+  "version": "1.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "export COMPOSE_PROFILES=be,fe && docker-compose up",
+    "start-be": "export COMPOSE_PROFILES=be && docker-compose up",
+    "start-tb": "export COMPOSE_PROFILES=db,tb,pi && docker-compose up",
+    "start-pi": "export COMPOSE_PROFILES=pi && docker-compose up",
+    "start-all": "export COMPOSE_PROFILES=db,tb,be,fe,pi && docker-compose up",
+    "build": "export COMPOSE_PROFILES=be,fe && docker-compose build",
+    "stop": "docker-compose down"
+  },
+  "private": true,
+  "dependencies": {
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.2",
+    "typescript": "~4.8.2"
+  }
+}
