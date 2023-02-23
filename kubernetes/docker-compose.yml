@@ -3,7 +3,8 @@ services:
   spotlight-be:
     container_name: spotlight-be  # Container name
     build: ./be
-    image: spotlight-be:latest
+    profiles:
+      - be
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: spotlight
@@ -23,7 +24,8 @@ services:
   spotlight-fe: 
       container_name: spotlight-fe  # Container name
       build: ./fe
-      image: spotlight-fe:latest
+      profiles:
+        - fe      
       ports: 
         - '80:3000' # Port mapping
       command: > 
@@ -36,6 +38,8 @@ services:
   db:
     image: postgres:12
     container_name: spotlight-db  # Container name
+    profiles:
+      - db
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
       timeout: 45s
@@ -43,6 +47,8 @@ services:
       retries: 10
     ports:
       - "5432:5432"
+    profiles:
+      - db
     volumes:
       - db-data:/var/lib/postgresql/data      
       - ./thingsboard:/docker-entrypoint-initdb.d/
@@ -63,6 +69,8 @@ services:
       - "7070:7070"
       # - "5432:5432"
       - "5683-5683:5683-5683/udp"
+    profiles:
+      - tb
     links:
       - "db:database"
     depends_on:
@@ -82,6 +90,8 @@ services:
   pi:
     image: ryankurte/docker-rpi-emu
     container_name: pi
+    profiles:
+          - pi
 
 volumes:
   db-data:

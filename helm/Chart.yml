@@ -1,0 +1,15 @@
+name: thehelmchart
+version: 0.1.0
+description: My first helm chart, to manage the multi-containers-deployment node applications
+keywords:
+  - node docker kubernetes helm tutorial intro
+home: https://github.com/thisisdavidbell/node-docker-kubernetes
+sources:
+  - https://github.com/thisisdavidbell/node-docker-kubernetes
+maintainers: # (optional)
+  - name: David Bell
+    email: thisisdavidbell@hotmail.com
+engine: gotpl # The name of the template engine (optional, defaults to gotpl)
+# icon: A URL to an SVG or PNG image to be used as an icon (optional).
+# appVersion: The version of the app that this contains (optional). This needn't be SemVer.
+# deprecated: Whether or not this chart is deprecated (optional, boolean)

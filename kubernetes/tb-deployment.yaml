@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tb
+  name: tb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: tb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: tb
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: thingsboard
+            - name: POSTGRES_PASSWORD
+              value: spotlight
+            - name: POSTGRES_USER
+              value: thingsboard
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: spotlight
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://spotlight-db:5432/thingsboard
+            - name: SPRING_DATASOURCE_USERNAME
+              value: thingsboard
+            - name: SPRING_DRIVER_CLASS_NAME
+              value: org.postgresql.Driver
+          image: thingsboard/tb-postgres
+          name: thingsboard
+          ports:
+            - containerPort: 9090
+            - containerPort: 1883
+            - containerPort: 7070
+            - containerPort: 5683
+              protocol: UDP
+          resources: {}
+          volumeMounts:
+            - mountPath: /home/rob/.mytb-data/tb-data
+              name: tb-data
+            - mountPath: /home/rob/.mytb-data/tb-logs
+              name: tb-logs
+      restartPolicy: Always
+      volumes:
+        - name: tb-data
+          persistentVolumeClaim:
+            claimName: tb-data
+        - name: tb-logs
+          persistentVolumeClaim:
+            claimName: tb-logs
+status: {}

@@ -1,0 +1,14 @@
+be.numReplicas: 2
+be.POSTGRES_USER: postgres
+be.POSTGRES_PASSWORD: spotlight
+be.POSTGRES_DB: postgres
+be.POSTGRES_SERVER: db
+be.POSTGRES_PORT: 5432
+be.DATABASE_URL: postgres://postgres:spotlight@spotlight-db:5432/postgres
+be.NODE_ENV: test
+be.PORT: 8080
+be.ports: '8080:8080'
+
+fe.numReplicas: 2
+fe.SPOTLIGHT-BE: spotlight-be
+fe.ports: '80:3000'
