@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spotlight
+spec:
+  replicas: {{.Values.numReplicas}}
+  template:
+    metadata:
+      labels:
+        app: spotlight-iot
+    spec:
+      containers:
+      - name: spotlight-fe
+        image: spotlight-fe:v1
+        ports:
+        - containerPort: {{.Values.fePort}}

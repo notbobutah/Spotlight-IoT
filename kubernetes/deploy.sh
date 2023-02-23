@@ -1,0 +1,17 @@
+eval $(minikube docker-env)
+minikube addons enable ingress
+
+# kubectl apply -f db-service.yaml,db-deployment.yaml,db-claim1-persistentvolumeclaim.yaml,db-data-persistentvolumeclaim.yaml
+# kubectl apply -f spotlight-fe-service.yaml,spotlight-fe-deployment.yaml
+# kubectl apply -f spotlight-be-claim0-persistentvolumeclaim.yaml,spotlight-be-claim1-persistentvolumeclaim.yaml,spotlight-be-service.yaml,spotlight-be-deployment.yaml
+# kubectl apply -f tb-data-persistentvolumeclaim.yaml,tb-deployment.yaml,tb-logs-persistentvolumeclaim.yaml,tb-service.yaml
+
+kubectl apply -f db-deployment.yaml,db-claim1-persistentvolumeclaim.yaml,db-data-persistentvolumeclaim.yaml
+kubectl apply -f spotlight-fe-deployment.yaml
+kubectl apply -f spotlight-be-claim0-persistentvolumeclaim.yaml,spotlight-be-claim1-persistentvolumeclaim.yaml,spotlight-be-deployment.yaml
+kubectl apply -f tb-data-persistentvolumeclaim.yaml,tb-deployment.yaml,tb-logs-persistentvolumeclaim.yaml
+
+kubectl expose deployment db --type=NodePort --name=db
+kubectl expose deployment spotlight-be --type=NodePort --name=spotlight-be
+kubectl expose deployment spotlight-fe --type=NodePort --name=spotlight-fe
+kubectl expose deployment tb --type=NodePort --name=tb

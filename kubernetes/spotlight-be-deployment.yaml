@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: spotlight-be
+  name: spotlight-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: spotlight-be
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: spotlight-be
+    spec:
+      containers:
+        - args:
+            - npm
+            - start
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:spotlight@spotlight-db:5432/postgres
+            - name: NODE_ENV
+              value: test
+            - name: PORT
+              value: "8080"
+            - name: POSTGRES_DB
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: spotlight
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: POSTGRES_SERVER
+              value: db
+            - name: POSTGRES_USER
+              value: postgres
+          image: spotlight-be:latest
+          imagePullPolicy: IfNotPresent
+          name: spotlight-be
+          ports:
+            - containerPort: 8080
+          resources: {}
+          volumeMounts:
+            - mountPath: /app/
+              name: spotlight-be-claim0
+            - mountPath: /app/node_modules
+              name: spotlight-be-claim1
+      restartPolicy: Always
+      volumes:
+        - name: spotlight-be-claim0
+          persistentVolumeClaim:
+            claimName: spotlight-be-claim0
+        - name: spotlight-be-claim1
+          persistentVolumeClaim:
+            claimName: spotlight-be-claim1
+status: {}
