@@ -33,6 +33,7 @@ The log file for this run can be found in the docs directory with timestamp.
 
 After working on the environment to configure docker to use the docker provider inside minikube so that local images could be found without reaching out to an image repsoitory the deploy.sh produced the followig cluster deployemtn
 
+```
 kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 db-6594c6888-qkdn8              1/1     Running   0          25s
@@ -40,7 +41,7 @@ my-release-etcd-0               1/1     Running   0          3h5m
 spotlight-be-c898f7587-ffgnv    1/1     Running   0          22s
 spotlight-fe-756fb77f6b-bs5xh   1/1     Running   0          24s
 tb-5b75dd5884-9tz5f             1/1     Running   0          21s
-
+```
 
 ### Thingsboard Docs
 #### User Manual
