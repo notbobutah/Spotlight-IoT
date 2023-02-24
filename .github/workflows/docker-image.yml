@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata for BE Docker
-        id: meta
+        id: bemeta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.BE_IMAGE_NAME }}
@@ -39,11 +39,11 @@ jobs:
         with:
           context: ./be
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.bemeta.outputs.tags }}
+          labels: ${{ steps.bemeta.outputs.labels }}
 
       - name: Extract metadata for FE Docker
-        id: meta
+        id: femeta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ env.REGISTRY }}/${{ env.FE_IMAGE_NAME }}
@@ -53,5 +53,5 @@ jobs:
         with:
           context: ./fe
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.femeta.outputs.tags }}
+          labels: ${{ steps.femeta.outputs.labels }}
