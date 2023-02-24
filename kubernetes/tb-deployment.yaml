@@ -35,12 +35,12 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: spotlight
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://spotlight-db:5432/thingsboard
+              value: jdbc:postgresql://db:5432/thingsboard
             - name: SPRING_DATASOURCE_USERNAME
               value: thingsboard
             - name: SPRING_DRIVER_CLASS_NAME
               value: org.postgresql.Driver
-          image: thingsboard/tb-postgres
+          image: thingsboard/tb
           name: thingsboard
           ports:
             - containerPort: 9090

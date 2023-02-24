@@ -43,6 +43,50 @@ spotlight-fe-756fb77f6b-bs5xh   1/1     Running   0          24s
 tb-5b75dd5884-9tz5f             1/1     Running   0          21s
 ```
 
+## DevOps deployment choices
+The project has several mechanism to deploy to kubernetes, it does not currrently dsupport native deploymewnts to GKE or AWS using non kubernetes descriptors.
+
+### Docker -compose
+The project contains a docker-compose.yalm file in the root of the project that includes docker image biuld functoinality for local embedded projects in the fe and be directories. Run the following command in a docker environment.
+
+```
+docker-compose up --build
+```
+Visit localhost:9090 for the Thingsboard login screen. 
+visit localhost:8080 for the RESTful API swagger page. 
+visit localhost:80 to view the diagram editor.
+
+### Kubernetes
+The project contains a kubernetes directory filled with resource descritor files that create a deployment in a configured Kubernetes environment, the development effort used minikube as the local kubernetes. In the directory ther eis a deploy.sh script that calls kubectl to deploy the resources files and expose the ports. 
+
+```
+./deploy.sh
+./undeploy.sh
+minikube service --all
+```
+Because the default nginx in minikube uses ephemeral ports to receive the access port that is exposed for a given service it will appear after the minicube call. If using an alternate kubernetes engine refer to its documentqatoin to receive access urls.
+
+
+### Terraform
+The project contains a terraform directory that currently contains descriptors to create a usable cluster in GKE based on an existing login sessoin. After the terraform process is applied to GKE you can access the cluster by running additional command slisted below to enable kubectl access to the cluster and its resources. You environment may vary from this.
+
+```
+terraform plan
+terraform apply
+gcloud components install gke-gcloud-auth-plugin
+sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+gcloud container clusters get-credentials spotlight-iot-gke --region us-central1-a
+kubectl config use-context gke_spotlight-iot_us-central1-a_spotlight-iot-gke
+kubectl create namespace spotlight
+kubectl get pods -n spotlight
+
+```
+#### Kubernetes deploy inside Terraform
+The current implementaon of terraform is not deploying any of the application resources in the kubernetes directory. After the above steps kubectl will be configred to point to the GKE based cluster and the deloy.sh script can be run against it to deploy.
+
+## Caveats
+The current deployment to GKE is not working due to not have a congifured image registry accessible to GKE to pull images from.
+
 ### Thingsboard Docs
 #### User Manual
 https://thingsboard.io/docs/user-guide
