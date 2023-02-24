@@ -31,7 +31,7 @@ spec:
           env:
             - name: SPOTLIGHT-BE
               value: spotlight-spotlight-be_1
-          image: spotlight-fe:latest
+          image: ghcr.io/notbobutah/spotlight-iot-fe:main
           imagePullPolicy: IfNotPresent
           name: spotlight-fe
           ports:

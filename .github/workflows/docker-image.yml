@@ -1,4 +1,4 @@
-name: Create and publish the BE Docker image
+name: Create and publish the BE and FE Docker images
 
 on:
   push:

@@ -45,7 +45,7 @@ spec:
               value: db
             - name: POSTGRES_USER
               value: postgres
-          image: spotlight-be:latest
+          image: ghcr.io/notbobutah/spotlight-iot-be:main
           imagePullPolicy: IfNotPresent
           name: spotlight-be
           ports:
