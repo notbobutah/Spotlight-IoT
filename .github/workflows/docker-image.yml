@@ -9,6 +9,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}-be
   BE_IMAGE_NAME: ${{ github.repository }}-be
   FE_IMAGE_NAME: ${{ github.repository }}-fe
+  DB_IMAGE_NAME: ${{ github.repository }}-db
 
 jobs:
   build-and-push-image:
