@@ -1,8 +1,8 @@
 # Spotlight IoT GCP
 ### Current production URLs from GKE on 2-25-2023
-Thingsbooard:         http://35.224.156.43:60000/login
-Diagramming Tool:     http://34.70.25.202:63000/
-API Service Doc:      http://35.193.168.243:60008/docs/
+Thingsbooard:         http://35.224.156.43:60000/login  
+Diagramming Tool:     http://34.70.25.202:63000/  
+API Service Doc:      http://35.193.168.243:60008/docs/  
 
 ### This intent of this project is based in th following simplistic requirements:
 1. Implement opensource React diagramming project as the front-end
