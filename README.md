@@ -84,6 +84,17 @@ kubectl get pods -n spotlight
 #### Kubernetes deploy inside Terraform
 The current implementaon of terraform is not deploying any of the application resources in the kubernetes directory. After the above steps kubectl will be configred to point to the GKE based cluster and the deloy.sh script can be run against it to deploy.
 
+This is the kubectl pod list from the GKE deployment.
+
+```
+NAME                            READY   STATUS    RESTARTS   AGE
+db-6b448d584-gtrzg              1/1     Running   0          2m14s
+spotlight-be-694557f95-n2z72    1/1     Running   0          71m
+spotlight-fe-66ff57df9b-j7wbj   1/1     Running   0          71m
+tb-84649f7878-jrktr             1/1     Running   0          61s
+```
+
+
 ## Caveats
 The current deployment to GKE is not working due to not have a congifured image registry accessible to GKE to pull images from.
 

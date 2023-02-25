@@ -51,21 +51,16 @@ spec:
             failureThreshold: 10
             periodSeconds: 10
             timeoutSeconds: 45
-          name: spotlight-db
+          name: db
           ports:
             - containerPort: 5432
           resources: {}
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: db-data
-            - mountPath: /docker-entrypoint-initdb.d/
-              name: db-claim1
+            - mountPath: /var/lib/postgresql/data/db
+              name: data
       restartPolicy: Always
       volumes:
-        - name: db-data
+        - name: data
           persistentVolumeClaim:
-            claimName: db-data
-        - name: db-claim1
-          persistentVolumeClaim:
-            claimName: db-claim1
+            claimName: data
 status: {}
