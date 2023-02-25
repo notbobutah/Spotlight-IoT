@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: be-lb-service
+spec:
+  type: LoadBalancer
+  selector:
+    api: be
+  ports:
+  - protocol: TCP
+    port: 60808
+    targetPort: 8080

@@ -35,11 +35,13 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: spotlight
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://db:5432/thingsboard
+              value: jdbc:postgresql://${DB_SERVICE_HOST}:${DB_SERVICE_PORT}/thingsboard
             - name: SPRING_DATASOURCE_USERNAME
               value: thingsboard
             - name: SPRING_DRIVER_CLASS_NAME
               value: org.postgresql.Driver
+            - name: SPRING_JPA_DATABASE_PLATFORM
+              value: org.hibernate.dialect.PostgreSQLDialect
           image: thingsboard/tb
           name: thingsboard
           ports:

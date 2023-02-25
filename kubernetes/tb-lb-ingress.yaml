@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tb-lb-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: tb
+    department: spotlight-be
+  ports:
+  - protocol: TCP
+    port: 60000
+    targetPort: 9090
