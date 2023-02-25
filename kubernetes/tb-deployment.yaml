@@ -50,9 +50,9 @@ spec:
               protocol: UDP
           resources: {}
           volumeMounts:
-            - mountPath: /home/rob/.mytb-data/tb-data
+            - mountPath: .mytb-data/tb-data
               name: tb-data
-            - mountPath: /home/rob/.mytb-data/tb-logs
+            - mountPath: .mytb-data/tb-logs
               name: tb-logs
       restartPolicy: Always
       volumes:

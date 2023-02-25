@@ -39,6 +39,7 @@ spec:
             - name: POSTGRES_USER
               value: postgres
           image: ghcr.io/notbobutah/spotlight-iot-db:main
+          imagePullPolicy: Always
           # livenessProbe:
           #   exec:
           #     command:
@@ -56,11 +57,11 @@ spec:
             - containerPort: 5432
           resources: {}
           # volumeMounts:
-          #   - mountPath: /var/lib/postgresql/data/
-          #     name: pg-data-pv
+          #    - mountPath: /var/lib/postgresql/data/
+          #      name: pg-data
       restartPolicy: Always
       # volumes:
-      #   - name: pg-data-pv
+      #   - name: pg-data
       #     persistentVolumeClaim:
       #       claimName: spotlight/pg-data-pvc
 status: {}
