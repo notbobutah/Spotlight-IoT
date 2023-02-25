@@ -7,8 +7,9 @@
 # kubectl apply -f tb-data-persistentvolumeclaim.yaml,tb-deployment.yaml,tb-logs-persistentvolumeclaim.yaml,tb-service.yaml
 
 kubectl create namespace spotlight
+# gcloud compute disks create --size=500GB --format --zone=us-central1-a pg-data-disk
 
-kubectl -n spotlight apply -f db-deployment.yaml,db-data-persistentvolumeclaim.yaml
+kubectl -n spotlight apply -f db-deployment.yaml,db-pg-data-persistentvolume.yaml
 kubectl -n spotlight apply -f spotlight-fe-deployment.yaml
 kubectl -n spotlight apply -f spotlight-be-claim0-persistentvolumeclaim.yaml,spotlight-be-claim1-persistentvolumeclaim.yaml,spotlight-be-deployment.yaml
 kubectl -n spotlight apply -f tb-data-persistentvolumeclaim.yaml,tb-deployment.yaml,tb-logs-persistentvolumeclaim.yaml

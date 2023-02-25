@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
-  name: data
+  name: pg-data-disk
 spec:
   accessModes:
     - ReadWriteOnce

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pg-data-pv
+spec:
+  storageClassName: "db-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  claimRef:
+    namespace: spotlight
+    name: pg-pv-claim
+  csi:
+    driver: pd.csi.storage.gke.io
+    volumeHandle: pg-data-pv
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: spotlight
+  name: pg-data-pvc
+spec:
+  storageClassName: "db-storage"
+  volumeName: pg-data-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
