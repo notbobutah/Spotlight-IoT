@@ -1,0 +1,2242 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:25Z",
+                "generateName": "db-dc7d58465-",
+                "labels": {
+                    "io.kompose.service": "db",
+                    "pod-template-hash": "dc7d58465"
+                },
+                "name": "db-dc7d58465-bfs6r",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "db-dc7d58465",
+                        "uid": "0648bebe-00bb-4fd8-a94b-bc189f8b7f25"
+                    }
+                ],
+                "resourceVersion": "13563",
+                "uid": "21b20fb2-3f0c-4261-80be-4100bf928c02"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "APP_DB_NAME",
+                                "value": "thingsboard"
+                            },
+                            {
+                                "name": "APP_DB_PASS",
+                                "value": "spotlight"
+                            },
+                            {
+                                "name": "APP_DB_USER",
+                                "value": "thingsboard"
+                            },
+                            {
+                                "name": "POSTGRES_DB",
+                                "value": "postgres"
+                            },
+                            {
+                                "name": "POSTGRES_PASSWORD",
+                                "value": "spotlight"
+                            },
+                            {
+                                "name": "POSTGRES_USER",
+                                "value": "postgres"
+                            }
+                        ],
+                        "image": "postgres:12",
+                        "imagePullPolicy": "IfNotPresent",
+                        "livenessProbe": {
+                            "exec": {
+                                "command": [
+                                    "pg_isready",
+                                    "-q",
+                                    "-d",
+                                    "postgres",
+                                    "-U",
+                                    "postgres"
+                                ]
+                            },
+                            "failureThreshold": 10,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 45
+                        },
+                        "name": "spotlight-db",
+                        "ports": [
+                            {
+                                "containerPort": 5432,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/lib/postgresql/data",
+                                "name": "db-data"
+                            },
+                            {
+                                "mountPath": "/docker-entrypoint-initdb.d/",
+                                "name": "db-claim1"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-dgwv9",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "gke-spotlight-iot-gk-spotlight-iot-gk-29982817-14jf",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "db-data",
+                        "persistentVolumeClaim": {
+                            "claimName": "db-data"
+                        }
+                    },
+                    {
+                        "name": "db-claim1",
+                        "persistentVolumeClaim": {
+                            "claimName": "db-claim1"
+                        }
+                    },
+                    {
+                        "name": "kube-api-access-dgwv9",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:32Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:38:57Z",
+                        "message": "containers with unready status: [spotlight-db]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:38:57Z",
+                        "message": "containers with unready status: [spotlight-db]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:32Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "containerd://b18d48c5025c027f102981b1af344347b388f4678b5b4b1981b490af5676d133",
+                        "image": "docker.io/library/postgres:12",
+                        "imageID": "docker.io/library/postgres@sha256:43b752e182ad5fd6b12d468f369853257fc88b3ab3494a55bacb60dc7af00c6d",
+                        "lastState": {
+                            "terminated": {
+                                "containerID": "containerd://b18d48c5025c027f102981b1af344347b388f4678b5b4b1981b490af5676d133",
+                                "exitCode": 1,
+                                "finishedAt": "2023-02-24T19:54:26Z",
+                                "reason": "Error",
+                                "startedAt": "2023-02-24T19:54:26Z"
+                            }
+                        },
+                        "name": "spotlight-db",
+                        "ready": false,
+                        "restartCount": 8,
+                        "started": false,
+                        "state": {
+                            "waiting": {
+                                "message": "back-off 5m0s restarting failed container=spotlight-db pod=db-dc7d58465-bfs6r_spotlight(21b20fb2-3f0c-4261-80be-4100bf928c02)",
+                                "reason": "CrashLoopBackOff"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.10.0.4",
+                "phase": "Running",
+                "podIP": "10.180.1.9",
+                "podIPs": [
+                    {
+                        "ip": "10.180.1.9"
+                    }
+                ],
+                "qosClass": "BestEffort",
+                "startTime": "2023-02-24T19:37:32Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:26Z",
+                "generateName": "spotlight-be-694557f95-",
+                "labels": {
+                    "io.kompose.service": "spotlight-be",
+                    "pod-template-hash": "694557f95"
+                },
+                "name": "spotlight-be-694557f95-n2z72",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "spotlight-be-694557f95",
+                        "uid": "461dfb84-91e3-4aea-9d00-1dd7e9eea2cd"
+                    }
+                ],
+                "resourceVersion": "6216",
+                "uid": "2301f3a6-388e-4305-855c-307623633954"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "args": [
+                            "npm",
+                            "start"
+                        ],
+                        "env": [
+                            {
+                                "name": "DATABASE_URL",
+                                "value": "postgres://postgres:spotlight@spotlight-db:5432/postgres"
+                            },
+                            {
+                                "name": "NODE_ENV",
+                                "value": "test"
+                            },
+                            {
+                                "name": "PORT",
+                                "value": "8080"
+                            },
+                            {
+                                "name": "POSTGRES_DB",
+                                "value": "postgres"
+                            },
+                            {
+                                "name": "POSTGRES_PASSWORD",
+                                "value": "spotlight"
+                            },
+                            {
+                                "name": "POSTGRES_PORT",
+                                "value": "5432"
+                            },
+                            {
+                                "name": "POSTGRES_SERVER",
+                                "value": "db"
+                            },
+                            {
+                                "name": "POSTGRES_USER",
+                                "value": "postgres"
+                            }
+                        ],
+                        "image": "ghcr.io/notbobutah/spotlight-iot-be:main",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "spotlight-be",
+                        "ports": [
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/app/",
+                                "name": "spotlight-be-claim0"
+                            },
+                            {
+                                "mountPath": "/app/node_modules",
+                                "name": "spotlight-be-claim1"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-trpcb",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "gke-spotlight-iot-gk-spotlight-iot-gk-29982817-5mmd",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "spotlight-be-claim0",
+                        "persistentVolumeClaim": {
+                            "claimName": "spotlight-be-claim0"
+                        }
+                    },
+                    {
+                        "name": "spotlight-be-claim1",
+                        "persistentVolumeClaim": {
+                            "claimName": "spotlight-be-claim1"
+                        }
+                    },
+                    {
+                        "name": "kube-api-access-trpcb",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:30Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:39:39Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:39:39Z",
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:30Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "containerd://0369b2adb7f47d18cba1897315c5ecf668920a17bd45d83034d47cf73af09a1b",
+                        "image": "ghcr.io/notbobutah/spotlight-iot-be:main",
+                        "imageID": "ghcr.io/notbobutah/spotlight-iot-be@sha256:f63cbf4304aefaa3a835f23a6014dd7c0d4bc157cb5671b10c2e9c4168781c9a",
+                        "lastState": {},
+                        "name": "spotlight-be",
+                        "ready": true,
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2023-02-24T19:39:39Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.10.0.5",
+                "phase": "Running",
+                "podIP": "10.180.2.7",
+                "podIPs": [
+                    {
+                        "ip": "10.180.2.7"
+                    }
+                ],
+                "qosClass": "BestEffort",
+                "startTime": "2023-02-24T19:37:30Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:26Z",
+                "generateName": "spotlight-fe-66ff57df9b-",
+                "labels": {
+                    "io.kompose.service": "spotlight-fe",
+                    "pod-template-hash": "66ff57df9b"
+                },
+                "name": "spotlight-fe-66ff57df9b-j7wbj",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "spotlight-fe-66ff57df9b",
+                        "uid": "39c79334-2c3f-481c-814d-b9cdd75cada4"
+                    }
+                ],
+                "resourceVersion": "5454",
+                "uid": "a0e5b4a6-7e51-43a5-892b-7de60bd9f524"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "args": [
+                            "bash",
+                            "-c",
+                            "npm start"
+                        ],
+                        "env": [
+                            {
+                                "name": "SPOTLIGHT-BE",
+                                "value": "spotlight-spotlight-be_1"
+                            }
+                        ],
+                        "image": "ghcr.io/notbobutah/spotlight-iot-fe:main",
+                        "imagePullPolicy": "IfNotPresent",
+                        "name": "spotlight-fe",
+                        "ports": [
+                            {
+                                "containerPort": 3000,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-dg6kl",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "gke-spotlight-iot-gk-spotlight-iot-gk-29982817-5mmd",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "kube-api-access-dg6kl",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:26Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:38:09Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:38:09Z",
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:26Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "containerd://a8d46da90c83d2fbb0574741e04181ea39b25e8b324fa940d7e5c998e9a1341f",
+                        "image": "ghcr.io/notbobutah/spotlight-iot-fe:main",
+                        "imageID": "ghcr.io/notbobutah/spotlight-iot-fe@sha256:b5ddd59d10bb9def72af8bf62447335e443bfb114682ae3bdfa792ce5dba22be",
+                        "lastState": {},
+                        "name": "spotlight-fe",
+                        "ready": true,
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2023-02-24T19:38:08Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.10.0.5",
+                "phase": "Running",
+                "podIP": "10.180.2.5",
+                "podIPs": [
+                    {
+                        "ip": "10.180.2.5"
+                    }
+                ],
+                "qosClass": "BestEffort",
+                "startTime": "2023-02-24T19:37:26Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:27Z",
+                "generateName": "tb-84649f7878-",
+                "labels": {
+                    "io.kompose.service": "tb",
+                    "pod-template-hash": "84649f7878"
+                },
+                "name": "tb-84649f7878-hkhzk",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "tb-84649f7878",
+                        "uid": "ccb7a37a-f53f-4e1b-9783-36888697817e"
+                    }
+                ],
+                "resourceVersion": "14082",
+                "uid": "6f44d65f-2a69-4fd7-aabc-7c2ba90483f1"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "env": [
+                            {
+                                "name": "POSTGRES_DB",
+                                "value": "thingsboard"
+                            },
+                            {
+                                "name": "POSTGRES_PASSWORD",
+                                "value": "spotlight"
+                            },
+                            {
+                                "name": "POSTGRES_USER",
+                                "value": "thingsboard"
+                            },
+                            {
+                                "name": "SPRING_DATASOURCE_PASSWORD",
+                                "value": "spotlight"
+                            },
+                            {
+                                "name": "SPRING_DATASOURCE_URL",
+                                "value": "jdbc:postgresql://db:5432/thingsboard"
+                            },
+                            {
+                                "name": "SPRING_DATASOURCE_USERNAME",
+                                "value": "thingsboard"
+                            },
+                            {
+                                "name": "SPRING_DRIVER_CLASS_NAME",
+                                "value": "org.postgresql.Driver"
+                            }
+                        ],
+                        "image": "thingsboard/tb",
+                        "imagePullPolicy": "Always",
+                        "name": "thingsboard",
+                        "ports": [
+                            {
+                                "containerPort": 9090,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 1883,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 7070,
+                                "protocol": "TCP"
+                            },
+                            {
+                                "containerPort": 5683,
+                                "protocol": "UDP"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/home/rob/.mytb-data/tb-data",
+                                "name": "tb-data"
+                            },
+                            {
+                                "mountPath": "/home/rob/.mytb-data/tb-logs",
+                                "name": "tb-logs"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-vhkg9",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "enableServiceLinks": true,
+                "nodeName": "gke-spotlight-iot-gk-spotlight-iot-gk-29982817-5mmd",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "tb-data",
+                        "persistentVolumeClaim": {
+                            "claimName": "tb-data"
+                        }
+                    },
+                    {
+                        "name": "tb-logs",
+                        "persistentVolumeClaim": {
+                            "claimName": "tb-logs"
+                        }
+                    },
+                    {
+                        "name": "kube-api-access-vhkg9",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:33Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:55:16Z",
+                        "message": "containers with unready status: [thingsboard]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:55:16Z",
+                        "message": "containers with unready status: [thingsboard]",
+                        "reason": "ContainersNotReady",
+                        "status": "False",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2023-02-24T19:37:33Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "containerd://9428b6722937a22f1c2e83a6d07fba863b5bbfae6cea48faa974c3270f14e958",
+                        "image": "docker.io/thingsboard/tb:latest",
+                        "imageID": "docker.io/thingsboard/tb@sha256:b854286c25fec81d6cae5453e3c82e721d5c3008f6d418d243736ce9453329cc",
+                        "lastState": {
+                            "terminated": {
+                                "containerID": "containerd://9428b6722937a22f1c2e83a6d07fba863b5bbfae6cea48faa974c3270f14e958",
+                                "exitCode": 0,
+                                "finishedAt": "2023-02-24T19:55:15Z",
+                                "reason": "Completed",
+                                "startedAt": "2023-02-24T19:53:56Z"
+                            }
+                        },
+                        "name": "thingsboard",
+                        "ready": false,
+                        "restartCount": 6,
+                        "started": false,
+                        "state": {
+                            "waiting": {
+                                "message": "back-off 5m0s restarting failed container=thingsboard pod=tb-84649f7878-hkhzk_spotlight(6f44d65f-2a69-4fd7-aabc-7c2ba90483f1)",
+                                "reason": "CrashLoopBackOff"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "10.10.0.5",
+                "phase": "Running",
+                "podIP": "10.180.2.6",
+                "podIPs": [
+                    {
+                        "ip": "10.180.2.6"
+                    }
+                ],
+                "qosClass": "BestEffort",
+                "startTime": "2023-02-24T19:37:33Z"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "creationTimestamp": "2023-02-24T19:37:27Z",
+                "labels": {
+                    "io.kompose.service": "db"
+                },
+                "name": "db",
+                "namespace": "spotlight",
+                "resourceVersion": "5027",
+                "uid": "013ef2d5-7efd-4d73-b96c-92a58dcd1a70"
+            },
+            "spec": {
+                "clusterIP": "10.183.245.34",
+                "clusterIPs": [
+                    "10.183.245.34"
+                ],
+                "externalTrafficPolicy": "Cluster",
+                "internalTrafficPolicy": "Cluster",
+                "ipFamilies": [
+                    "IPv4"
+                ],
+                "ipFamilyPolicy": "SingleStack",
+                "ports": [
+                    {
+                        "nodePort": 31595,
+                        "port": 5432,
+                        "protocol": "TCP",
+                        "targetPort": 5432
+                    }
+                ],
+                "selector": {
+                    "io.kompose.service": "db"
+                },
+                "sessionAffinity": "None",
+                "type": "NodePort"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "creationTimestamp": "2023-02-24T19:37:28Z",
+                "labels": {
+                    "io.kompose.service": "spotlight-be"
+                },
+                "name": "spotlight-be",
+                "namespace": "spotlight",
+                "resourceVersion": "5042",
+                "uid": "e7e14df0-4551-4d0a-ba5c-2122c51e8f91"
+            },
+            "spec": {
+                "clusterIP": "10.183.255.11",
+                "clusterIPs": [
+                    "10.183.255.11"
+                ],
+                "externalTrafficPolicy": "Cluster",
+                "internalTrafficPolicy": "Cluster",
+                "ipFamilies": [
+                    "IPv4"
+                ],
+                "ipFamilyPolicy": "SingleStack",
+                "ports": [
+                    {
+                        "nodePort": 30233,
+                        "port": 8080,
+                        "protocol": "TCP",
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "io.kompose.service": "spotlight-be"
+                },
+                "sessionAffinity": "None",
+                "type": "NodePort"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "creationTimestamp": "2023-02-24T19:37:28Z",
+                "labels": {
+                    "io.kompose.service": "spotlight-fe"
+                },
+                "name": "spotlight-fe",
+                "namespace": "spotlight",
+                "resourceVersion": "5048",
+                "uid": "049104ff-8e1a-45bf-b618-e5803d73218d"
+            },
+            "spec": {
+                "clusterIP": "10.183.252.246",
+                "clusterIPs": [
+                    "10.183.252.246"
+                ],
+                "externalTrafficPolicy": "Cluster",
+                "internalTrafficPolicy": "Cluster",
+                "ipFamilies": [
+                    "IPv4"
+                ],
+                "ipFamilyPolicy": "SingleStack",
+                "ports": [
+                    {
+                        "nodePort": 32479,
+                        "port": 3000,
+                        "protocol": "TCP",
+                        "targetPort": 3000
+                    }
+                ],
+                "selector": {
+                    "io.kompose.service": "spotlight-fe"
+                },
+                "sessionAffinity": "None",
+                "type": "NodePort"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "creationTimestamp": "2023-02-24T19:37:28Z",
+                "labels": {
+                    "io.kompose.service": "tb"
+                },
+                "name": "tb",
+                "namespace": "spotlight",
+                "resourceVersion": "5036",
+                "uid": "515e3a3a-6657-4be7-b96a-dc469bceda7b"
+            },
+            "spec": {
+                "clusterIP": "10.183.242.31",
+                "clusterIPs": [
+                    "10.183.242.31"
+                ],
+                "externalTrafficPolicy": "Cluster",
+                "internalTrafficPolicy": "Cluster",
+                "ipFamilies": [
+                    "IPv4"
+                ],
+                "ipFamilyPolicy": "SingleStack",
+                "ports": [
+                    {
+                        "name": "port-1",
+                        "nodePort": 32017,
+                        "port": 9090,
+                        "protocol": "TCP",
+                        "targetPort": 9090
+                    },
+                    {
+                        "name": "port-2",
+                        "nodePort": 31105,
+                        "port": 1883,
+                        "protocol": "TCP",
+                        "targetPort": 1883
+                    },
+                    {
+                        "name": "port-3",
+                        "nodePort": 30251,
+                        "port": 7070,
+                        "protocol": "TCP",
+                        "targetPort": 7070
+                    },
+                    {
+                        "name": "port-4",
+                        "nodePort": 32014,
+                        "port": 5683,
+                        "protocol": "UDP",
+                        "targetPort": 5683
+                    }
+                ],
+                "selector": {
+                    "io.kompose.service": "tb"
+                },
+                "sessionAffinity": "None",
+                "type": "NodePort"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)",
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"db\"},\"name\":\"db\",\"namespace\":\"spotlight\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"io.kompose.service\":\"db\"}},\"strategy\":{\"type\":\"Recreate\"},\"template\":{\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"db\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"APP_DB_NAME\",\"value\":\"thingsboard\"},{\"name\":\"APP_DB_PASS\",\"value\":\"spotlight\"},{\"name\":\"APP_DB_USER\",\"value\":\"thingsboard\"},{\"name\":\"POSTGRES_DB\",\"value\":\"postgres\"},{\"name\":\"POSTGRES_PASSWORD\",\"value\":\"spotlight\"},{\"name\":\"POSTGRES_USER\",\"value\":\"postgres\"}],\"image\":\"postgres:12\",\"livenessProbe\":{\"exec\":{\"command\":[\"pg_isready\",\"-q\",\"-d\",\"postgres\",\"-U\",\"postgres\"]},\"failureThreshold\":10,\"periodSeconds\":10,\"timeoutSeconds\":45},\"name\":\"spotlight-db\",\"ports\":[{\"containerPort\":5432}],\"resources\":{},\"volumeMounts\":[{\"mountPath\":\"/var/lib/postgresql/data\",\"name\":\"db-data\"},{\"mountPath\":\"/docker-entrypoint-initdb.d/\",\"name\":\"db-claim1\"}]}],\"restartPolicy\":\"Always\",\"volumes\":[{\"name\":\"db-data\",\"persistentVolumeClaim\":{\"claimName\":\"db-data\"}},{\"name\":\"db-claim1\",\"persistentVolumeClaim\":{\"claimName\":\"db-claim1\"}}]}}},\"status\":{}}\n"
+                },
+                "creationTimestamp": "2023-02-24T19:37:25Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "db"
+                },
+                "name": "db",
+                "namespace": "spotlight",
+                "resourceVersion": "5874",
+                "uid": "9241c397-2cf6-4b32-9f06-bd141b8a9efd"
+            },
+            "spec": {
+                "progressDeadlineSeconds": 600,
+                "replicas": 1,
+                "revisionHistoryLimit": 10,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "db"
+                    }
+                },
+                "strategy": {
+                    "type": "Recreate"
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "db"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "env": [
+                                    {
+                                        "name": "APP_DB_NAME",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "APP_DB_PASS",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "APP_DB_USER",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "POSTGRES_DB",
+                                        "value": "postgres"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "POSTGRES_USER",
+                                        "value": "postgres"
+                                    }
+                                ],
+                                "image": "postgres:12",
+                                "imagePullPolicy": "IfNotPresent",
+                                "livenessProbe": {
+                                    "exec": {
+                                        "command": [
+                                            "pg_isready",
+                                            "-q",
+                                            "-d",
+                                            "postgres",
+                                            "-U",
+                                            "postgres"
+                                        ]
+                                    },
+                                    "failureThreshold": 10,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "timeoutSeconds": 45
+                                },
+                                "name": "spotlight-db",
+                                "ports": [
+                                    {
+                                        "containerPort": 5432,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/var/lib/postgresql/data",
+                                        "name": "db-data"
+                                    },
+                                    {
+                                        "mountPath": "/docker-entrypoint-initdb.d/",
+                                        "name": "db-claim1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "db-data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "db-data"
+                                }
+                            },
+                            {
+                                "name": "db-claim1",
+                                "persistentVolumeClaim": {
+                                    "claimName": "db-claim1"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2023-02-24T19:37:25Z",
+                        "lastUpdateTime": "2023-02-24T19:37:57Z",
+                        "message": "ReplicaSet \"db-dc7d58465\" has successfully progressed.",
+                        "reason": "NewReplicaSetAvailable",
+                        "status": "True",
+                        "type": "Progressing"
+                    },
+                    {
+                        "lastTransitionTime": "2023-02-24T19:38:57Z",
+                        "lastUpdateTime": "2023-02-24T19:38:57Z",
+                        "message": "Deployment does not have minimum availability.",
+                        "reason": "MinimumReplicasUnavailable",
+                        "status": "False",
+                        "type": "Available"
+                    }
+                ],
+                "observedGeneration": 1,
+                "replicas": 1,
+                "unavailableReplicas": 1,
+                "updatedReplicas": 1
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)",
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"spotlight-be\"},\"name\":\"spotlight-be\",\"namespace\":\"spotlight\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"io.kompose.service\":\"spotlight-be\"}},\"strategy\":{\"type\":\"Recreate\"},\"template\":{\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"spotlight-be\"}},\"spec\":{\"containers\":[{\"args\":[\"npm\",\"start\"],\"env\":[{\"name\":\"DATABASE_URL\",\"value\":\"postgres://postgres:spotlight@spotlight-db:5432/postgres\"},{\"name\":\"NODE_ENV\",\"value\":\"test\"},{\"name\":\"PORT\",\"value\":\"8080\"},{\"name\":\"POSTGRES_DB\",\"value\":\"postgres\"},{\"name\":\"POSTGRES_PASSWORD\",\"value\":\"spotlight\"},{\"name\":\"POSTGRES_PORT\",\"value\":\"5432\"},{\"name\":\"POSTGRES_SERVER\",\"value\":\"db\"},{\"name\":\"POSTGRES_USER\",\"value\":\"postgres\"}],\"image\":\"ghcr.io/notbobutah/spotlight-iot-be:main\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"spotlight-be\",\"ports\":[{\"containerPort\":8080}],\"resources\":{},\"volumeMounts\":[{\"mountPath\":\"/app/\",\"name\":\"spotlight-be-claim0\"},{\"mountPath\":\"/app/node_modules\",\"name\":\"spotlight-be-claim1\"}]}],\"restartPolicy\":\"Always\",\"volumes\":[{\"name\":\"spotlight-be-claim0\",\"persistentVolumeClaim\":{\"claimName\":\"spotlight-be-claim0\"}},{\"name\":\"spotlight-be-claim1\",\"persistentVolumeClaim\":{\"claimName\":\"spotlight-be-claim1\"}}]}}},\"status\":{}}\n"
+                },
+                "creationTimestamp": "2023-02-24T19:37:26Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "spotlight-be"
+                },
+                "name": "spotlight-be",
+                "namespace": "spotlight",
+                "resourceVersion": "6220",
+                "uid": "9a1afcb5-9d31-40d8-b6a3-251497c50dac"
+            },
+            "spec": {
+                "progressDeadlineSeconds": 600,
+                "replicas": 1,
+                "revisionHistoryLimit": 10,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "spotlight-be"
+                    }
+                },
+                "strategy": {
+                    "type": "Recreate"
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "spotlight-be"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "args": [
+                                    "npm",
+                                    "start"
+                                ],
+                                "env": [
+                                    {
+                                        "name": "DATABASE_URL",
+                                        "value": "postgres://postgres:spotlight@spotlight-db:5432/postgres"
+                                    },
+                                    {
+                                        "name": "NODE_ENV",
+                                        "value": "test"
+                                    },
+                                    {
+                                        "name": "PORT",
+                                        "value": "8080"
+                                    },
+                                    {
+                                        "name": "POSTGRES_DB",
+                                        "value": "postgres"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PORT",
+                                        "value": "5432"
+                                    },
+                                    {
+                                        "name": "POSTGRES_SERVER",
+                                        "value": "db"
+                                    },
+                                    {
+                                        "name": "POSTGRES_USER",
+                                        "value": "postgres"
+                                    }
+                                ],
+                                "image": "ghcr.io/notbobutah/spotlight-iot-be:main",
+                                "imagePullPolicy": "IfNotPresent",
+                                "name": "spotlight-be",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/app/",
+                                        "name": "spotlight-be-claim0"
+                                    },
+                                    {
+                                        "mountPath": "/app/node_modules",
+                                        "name": "spotlight-be-claim1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "spotlight-be-claim0",
+                                "persistentVolumeClaim": {
+                                    "claimName": "spotlight-be-claim0"
+                                }
+                            },
+                            {
+                                "name": "spotlight-be-claim1",
+                                "persistentVolumeClaim": {
+                                    "claimName": "spotlight-be-claim1"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "availableReplicas": 1,
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2023-02-24T19:39:39Z",
+                        "lastUpdateTime": "2023-02-24T19:39:39Z",
+                        "message": "Deployment has minimum availability.",
+                        "reason": "MinimumReplicasAvailable",
+                        "status": "True",
+                        "type": "Available"
+                    },
+                    {
+                        "lastTransitionTime": "2023-02-24T19:37:26Z",
+                        "lastUpdateTime": "2023-02-24T19:39:39Z",
+                        "message": "ReplicaSet \"spotlight-be-694557f95\" has successfully progressed.",
+                        "reason": "NewReplicaSetAvailable",
+                        "status": "True",
+                        "type": "Progressing"
+                    }
+                ],
+                "observedGeneration": 1,
+                "readyReplicas": 1,
+                "replicas": 1,
+                "updatedReplicas": 1
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)",
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"spotlight-fe\"},\"name\":\"spotlight-fe\",\"namespace\":\"spotlight\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"io.kompose.service\":\"spotlight-fe\"}},\"strategy\":{},\"template\":{\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"spotlight-fe\"}},\"spec\":{\"containers\":[{\"args\":[\"bash\",\"-c\",\"npm start\"],\"env\":[{\"name\":\"SPOTLIGHT-BE\",\"value\":\"spotlight-spotlight-be_1\"}],\"image\":\"ghcr.io/notbobutah/spotlight-iot-fe:main\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"spotlight-fe\",\"ports\":[{\"containerPort\":3000}],\"resources\":{}}],\"restartPolicy\":\"Always\"}}},\"status\":{}}\n"
+                },
+                "creationTimestamp": "2023-02-24T19:37:25Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "spotlight-fe"
+                },
+                "name": "spotlight-fe",
+                "namespace": "spotlight",
+                "resourceVersion": "5458",
+                "uid": "ab28ed75-8686-4c7e-bfa7-2c3888ad65fc"
+            },
+            "spec": {
+                "progressDeadlineSeconds": 600,
+                "replicas": 1,
+                "revisionHistoryLimit": 10,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "spotlight-fe"
+                    }
+                },
+                "strategy": {
+                    "rollingUpdate": {
+                        "maxSurge": "25%",
+                        "maxUnavailable": "25%"
+                    },
+                    "type": "RollingUpdate"
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "spotlight-fe"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "args": [
+                                    "bash",
+                                    "-c",
+                                    "npm start"
+                                ],
+                                "env": [
+                                    {
+                                        "name": "SPOTLIGHT-BE",
+                                        "value": "spotlight-spotlight-be_1"
+                                    }
+                                ],
+                                "image": "ghcr.io/notbobutah/spotlight-iot-fe:main",
+                                "imagePullPolicy": "IfNotPresent",
+                                "name": "spotlight-fe",
+                                "ports": [
+                                    {
+                                        "containerPort": 3000,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File"
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30
+                    }
+                }
+            },
+            "status": {
+                "availableReplicas": 1,
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2023-02-24T19:38:09Z",
+                        "lastUpdateTime": "2023-02-24T19:38:09Z",
+                        "message": "Deployment has minimum availability.",
+                        "reason": "MinimumReplicasAvailable",
+                        "status": "True",
+                        "type": "Available"
+                    },
+                    {
+                        "lastTransitionTime": "2023-02-24T19:37:25Z",
+                        "lastUpdateTime": "2023-02-24T19:38:09Z",
+                        "message": "ReplicaSet \"spotlight-fe-66ff57df9b\" has successfully progressed.",
+                        "reason": "NewReplicaSetAvailable",
+                        "status": "True",
+                        "type": "Progressing"
+                    }
+                ],
+                "observedGeneration": 1,
+                "readyReplicas": 1,
+                "replicas": 1,
+                "updatedReplicas": 1
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)",
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"tb\"},\"name\":\"tb\",\"namespace\":\"spotlight\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"io.kompose.service\":\"tb\"}},\"strategy\":{\"type\":\"Recreate\"},\"template\":{\"metadata\":{\"annotations\":{\"kompose.cmd\":\"kompose convert\",\"kompose.version\":\"1.26.0 (40646f47)\"},\"creationTimestamp\":null,\"labels\":{\"io.kompose.service\":\"tb\"}},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"POSTGRES_DB\",\"value\":\"thingsboard\"},{\"name\":\"POSTGRES_PASSWORD\",\"value\":\"spotlight\"},{\"name\":\"POSTGRES_USER\",\"value\":\"thingsboard\"},{\"name\":\"SPRING_DATASOURCE_PASSWORD\",\"value\":\"spotlight\"},{\"name\":\"SPRING_DATASOURCE_URL\",\"value\":\"jdbc:postgresql://db:5432/thingsboard\"},{\"name\":\"SPRING_DATASOURCE_USERNAME\",\"value\":\"thingsboard\"},{\"name\":\"SPRING_DRIVER_CLASS_NAME\",\"value\":\"org.postgresql.Driver\"}],\"image\":\"thingsboard/tb\",\"name\":\"thingsboard\",\"ports\":[{\"containerPort\":9090},{\"containerPort\":1883},{\"containerPort\":7070},{\"containerPort\":5683,\"protocol\":\"UDP\"}],\"resources\":{},\"volumeMounts\":[{\"mountPath\":\"/home/rob/.mytb-data/tb-data\",\"name\":\"tb-data\"},{\"mountPath\":\"/home/rob/.mytb-data/tb-logs\",\"name\":\"tb-logs\"}]}],\"restartPolicy\":\"Always\",\"volumes\":[{\"name\":\"tb-data\",\"persistentVolumeClaim\":{\"claimName\":\"tb-data\"}},{\"name\":\"tb-logs\",\"persistentVolumeClaim\":{\"claimName\":\"tb-logs\"}}]}}},\"status\":{}}\n"
+                },
+                "creationTimestamp": "2023-02-24T19:37:27Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "tb"
+                },
+                "name": "tb",
+                "namespace": "spotlight",
+                "resourceVersion": "13963",
+                "uid": "9e53f600-a6ce-4bd7-8943-bbc6dad884f5"
+            },
+            "spec": {
+                "progressDeadlineSeconds": 600,
+                "replicas": 1,
+                "revisionHistoryLimit": 10,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "tb"
+                    }
+                },
+                "strategy": {
+                    "type": "Recreate"
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "tb"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "env": [
+                                    {
+                                        "name": "POSTGRES_DB",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "POSTGRES_USER",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "SPRING_DATASOURCE_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "SPRING_DATASOURCE_URL",
+                                        "value": "jdbc:postgresql://db:5432/thingsboard"
+                                    },
+                                    {
+                                        "name": "SPRING_DATASOURCE_USERNAME",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "SPRING_DRIVER_CLASS_NAME",
+                                        "value": "org.postgresql.Driver"
+                                    }
+                                ],
+                                "image": "thingsboard/tb",
+                                "imagePullPolicy": "Always",
+                                "name": "thingsboard",
+                                "ports": [
+                                    {
+                                        "containerPort": 9090,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 1883,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 7070,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 5683,
+                                        "protocol": "UDP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/home/rob/.mytb-data/tb-data",
+                                        "name": "tb-data"
+                                    },
+                                    {
+                                        "mountPath": "/home/rob/.mytb-data/tb-logs",
+                                        "name": "tb-logs"
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "tb-data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "tb-data"
+                                }
+                            },
+                            {
+                                "name": "tb-logs",
+                                "persistentVolumeClaim": {
+                                    "claimName": "tb-logs"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastTransitionTime": "2023-02-24T19:37:27Z",
+                        "lastUpdateTime": "2023-02-24T19:38:52Z",
+                        "message": "ReplicaSet \"tb-84649f7878\" has successfully progressed.",
+                        "reason": "NewReplicaSetAvailable",
+                        "status": "True",
+                        "type": "Progressing"
+                    },
+                    {
+                        "lastTransitionTime": "2023-02-24T19:55:16Z",
+                        "lastUpdateTime": "2023-02-24T19:55:16Z",
+                        "message": "Deployment does not have minimum availability.",
+                        "reason": "MinimumReplicasUnavailable",
+                        "status": "False",
+                        "type": "Available"
+                    }
+                ],
+                "observedGeneration": 1,
+                "replicas": 1,
+                "unavailableReplicas": 1,
+                "updatedReplicas": 1
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "ReplicaSet",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/desired-replicas": "1",
+                    "deployment.kubernetes.io/max-replicas": "1",
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:25Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "db",
+                    "pod-template-hash": "dc7d58465"
+                },
+                "name": "db-dc7d58465",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Deployment",
+                        "name": "db",
+                        "uid": "9241c397-2cf6-4b32-9f06-bd141b8a9efd"
+                    }
+                ],
+                "resourceVersion": "5872",
+                "uid": "0648bebe-00bb-4fd8-a94b-bc189f8b7f25"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "db",
+                        "pod-template-hash": "dc7d58465"
+                    }
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "db",
+                            "pod-template-hash": "dc7d58465"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "env": [
+                                    {
+                                        "name": "APP_DB_NAME",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "APP_DB_PASS",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "APP_DB_USER",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "POSTGRES_DB",
+                                        "value": "postgres"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "POSTGRES_USER",
+                                        "value": "postgres"
+                                    }
+                                ],
+                                "image": "postgres:12",
+                                "imagePullPolicy": "IfNotPresent",
+                                "livenessProbe": {
+                                    "exec": {
+                                        "command": [
+                                            "pg_isready",
+                                            "-q",
+                                            "-d",
+                                            "postgres",
+                                            "-U",
+                                            "postgres"
+                                        ]
+                                    },
+                                    "failureThreshold": 10,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "timeoutSeconds": 45
+                                },
+                                "name": "spotlight-db",
+                                "ports": [
+                                    {
+                                        "containerPort": 5432,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/var/lib/postgresql/data",
+                                        "name": "db-data"
+                                    },
+                                    {
+                                        "mountPath": "/docker-entrypoint-initdb.d/",
+                                        "name": "db-claim1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "db-data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "db-data"
+                                }
+                            },
+                            {
+                                "name": "db-claim1",
+                                "persistentVolumeClaim": {
+                                    "claimName": "db-claim1"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "fullyLabeledReplicas": 1,
+                "observedGeneration": 1,
+                "replicas": 1
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "ReplicaSet",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/desired-replicas": "1",
+                    "deployment.kubernetes.io/max-replicas": "1",
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:26Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "spotlight-be",
+                    "pod-template-hash": "694557f95"
+                },
+                "name": "spotlight-be-694557f95",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Deployment",
+                        "name": "spotlight-be",
+                        "uid": "9a1afcb5-9d31-40d8-b6a3-251497c50dac"
+                    }
+                ],
+                "resourceVersion": "6219",
+                "uid": "461dfb84-91e3-4aea-9d00-1dd7e9eea2cd"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "spotlight-be",
+                        "pod-template-hash": "694557f95"
+                    }
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "spotlight-be",
+                            "pod-template-hash": "694557f95"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "args": [
+                                    "npm",
+                                    "start"
+                                ],
+                                "env": [
+                                    {
+                                        "name": "DATABASE_URL",
+                                        "value": "postgres://postgres:spotlight@spotlight-db:5432/postgres"
+                                    },
+                                    {
+                                        "name": "NODE_ENV",
+                                        "value": "test"
+                                    },
+                                    {
+                                        "name": "PORT",
+                                        "value": "8080"
+                                    },
+                                    {
+                                        "name": "POSTGRES_DB",
+                                        "value": "postgres"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PORT",
+                                        "value": "5432"
+                                    },
+                                    {
+                                        "name": "POSTGRES_SERVER",
+                                        "value": "db"
+                                    },
+                                    {
+                                        "name": "POSTGRES_USER",
+                                        "value": "postgres"
+                                    }
+                                ],
+                                "image": "ghcr.io/notbobutah/spotlight-iot-be:main",
+                                "imagePullPolicy": "IfNotPresent",
+                                "name": "spotlight-be",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/app/",
+                                        "name": "spotlight-be-claim0"
+                                    },
+                                    {
+                                        "mountPath": "/app/node_modules",
+                                        "name": "spotlight-be-claim1"
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "spotlight-be-claim0",
+                                "persistentVolumeClaim": {
+                                    "claimName": "spotlight-be-claim0"
+                                }
+                            },
+                            {
+                                "name": "spotlight-be-claim1",
+                                "persistentVolumeClaim": {
+                                    "claimName": "spotlight-be-claim1"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "availableReplicas": 1,
+                "fullyLabeledReplicas": 1,
+                "observedGeneration": 1,
+                "readyReplicas": 1,
+                "replicas": 1
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "ReplicaSet",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/desired-replicas": "1",
+                    "deployment.kubernetes.io/max-replicas": "2",
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:25Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "spotlight-fe",
+                    "pod-template-hash": "66ff57df9b"
+                },
+                "name": "spotlight-fe-66ff57df9b",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Deployment",
+                        "name": "spotlight-fe",
+                        "uid": "ab28ed75-8686-4c7e-bfa7-2c3888ad65fc"
+                    }
+                ],
+                "resourceVersion": "5457",
+                "uid": "39c79334-2c3f-481c-814d-b9cdd75cada4"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "spotlight-fe",
+                        "pod-template-hash": "66ff57df9b"
+                    }
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "spotlight-fe",
+                            "pod-template-hash": "66ff57df9b"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "args": [
+                                    "bash",
+                                    "-c",
+                                    "npm start"
+                                ],
+                                "env": [
+                                    {
+                                        "name": "SPOTLIGHT-BE",
+                                        "value": "spotlight-spotlight-be_1"
+                                    }
+                                ],
+                                "image": "ghcr.io/notbobutah/spotlight-iot-fe:main",
+                                "imagePullPolicy": "IfNotPresent",
+                                "name": "spotlight-fe",
+                                "ports": [
+                                    {
+                                        "containerPort": 3000,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File"
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30
+                    }
+                }
+            },
+            "status": {
+                "availableReplicas": 1,
+                "fullyLabeledReplicas": 1,
+                "observedGeneration": 1,
+                "readyReplicas": 1,
+                "replicas": 1
+            }
+        },
+        {
+            "apiVersion": "apps/v1",
+            "kind": "ReplicaSet",
+            "metadata": {
+                "annotations": {
+                    "deployment.kubernetes.io/desired-replicas": "1",
+                    "deployment.kubernetes.io/max-replicas": "1",
+                    "deployment.kubernetes.io/revision": "1",
+                    "kompose.cmd": "kompose convert",
+                    "kompose.version": "1.26.0 (40646f47)"
+                },
+                "creationTimestamp": "2023-02-24T19:37:27Z",
+                "generation": 1,
+                "labels": {
+                    "io.kompose.service": "tb",
+                    "pod-template-hash": "84649f7878"
+                },
+                "name": "tb-84649f7878",
+                "namespace": "spotlight",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "Deployment",
+                        "name": "tb",
+                        "uid": "9e53f600-a6ce-4bd7-8943-bbc6dad884f5"
+                    }
+                ],
+                "resourceVersion": "13961",
+                "uid": "ccb7a37a-f53f-4e1b-9783-36888697817e"
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "matchLabels": {
+                        "io.kompose.service": "tb",
+                        "pod-template-hash": "84649f7878"
+                    }
+                },
+                "template": {
+                    "metadata": {
+                        "annotations": {
+                            "kompose.cmd": "kompose convert",
+                            "kompose.version": "1.26.0 (40646f47)"
+                        },
+                        "creationTimestamp": null,
+                        "labels": {
+                            "io.kompose.service": "tb",
+                            "pod-template-hash": "84649f7878"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "env": [
+                                    {
+                                        "name": "POSTGRES_DB",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "POSTGRES_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "POSTGRES_USER",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "SPRING_DATASOURCE_PASSWORD",
+                                        "value": "spotlight"
+                                    },
+                                    {
+                                        "name": "SPRING_DATASOURCE_URL",
+                                        "value": "jdbc:postgresql://db:5432/thingsboard"
+                                    },
+                                    {
+                                        "name": "SPRING_DATASOURCE_USERNAME",
+                                        "value": "thingsboard"
+                                    },
+                                    {
+                                        "name": "SPRING_DRIVER_CLASS_NAME",
+                                        "value": "org.postgresql.Driver"
+                                    }
+                                ],
+                                "image": "thingsboard/tb",
+                                "imagePullPolicy": "Always",
+                                "name": "thingsboard",
+                                "ports": [
+                                    {
+                                        "containerPort": 9090,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 1883,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 7070,
+                                        "protocol": "TCP"
+                                    },
+                                    {
+                                        "containerPort": 5683,
+                                        "protocol": "UDP"
+                                    }
+                                ],
+                                "resources": {},
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/home/rob/.mytb-data/tb-data",
+                                        "name": "tb-data"
+                                    },
+                                    {
+                                        "mountPath": "/home/rob/.mytb-data/tb-logs",
+                                        "name": "tb-logs"
+                                    }
+                                ]
+                            }
+                        ],
+                        "dnsPolicy": "ClusterFirst",
+                        "restartPolicy": "Always",
+                        "schedulerName": "default-scheduler",
+                        "securityContext": {},
+                        "terminationGracePeriodSeconds": 30,
+                        "volumes": [
+                            {
+                                "name": "tb-data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "tb-data"
+                                }
+                            },
+                            {
+                                "name": "tb-logs",
+                                "persistentVolumeClaim": {
+                                    "claimName": "tb-logs"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {
+                "fullyLabeledReplicas": 1,
+                "observedGeneration": 1,
+                "replicas": 1
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
