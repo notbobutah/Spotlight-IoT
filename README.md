@@ -1,6 +1,6 @@
 # Spotlight IoT GCP
 ### Current production URLs from GKE on 2-25-2023
-Thingsboard:         http://35.224.156.43:60000/login  
+Thingsboard:         http://35.224.156.43:60000/login  http://35.224.156.43:60000/swagger-ui/  
 Diagramming Tool:     http://34.70.25.202:63000/  
 API Service Doc:      http://35.193.168.243:60008/docs/  
 
