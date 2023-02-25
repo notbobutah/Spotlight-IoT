@@ -36,6 +36,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.BE_IMAGE_NAME }}
           tags: |
              type=ref,event=tag
+             latest
 
       - name: Build and push Docker image for BE
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -52,7 +53,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.FE_IMAGE_NAME }}
           tags: |
              type=ref,event=tag
-
+             latest
 
       - name: Build and push Docker image for FE
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -69,6 +70,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.DB_IMAGE_NAME }}
           tags: |
              type=ref,event=tag
+             latest
 
       - name: Build and push Docker image for DB
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
