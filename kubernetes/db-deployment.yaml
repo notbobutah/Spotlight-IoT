@@ -39,28 +39,28 @@ spec:
             - name: POSTGRES_USER
               value: postgres
           image: ghcr.io/notbobutah/spotlight-iot-db:main
-          livenessProbe:
-            exec:
-              command:
-                - pg_isready
-                - -q
-                - -d
-                - postgres
-                - -U
-                - postgres
-            failureThreshold: 10
-            periodSeconds: 10
-            timeoutSeconds: 45
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - pg_isready
+          #       - -q
+          #       - -d
+          #       - postgres
+          #       - -U
+          #       - postgres
+          #   failureThreshold: 10
+          #   periodSeconds: 10
+          #   timeoutSeconds: 45
           name: db
           ports:
             - containerPort: 5432
           resources: {}
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data/
-              name: db-data
+          # volumeMounts:
+          #   - mountPath: /var/lib/postgresql/data/
+          #     name: pg-data-pv
       restartPolicy: Always
-      volumes:
-        - name: db-data
-          persistentVolumeClaim:
-            claimName: pg-data-pvc
+      # volumes:
+      #   - name: pg-data-pv
+      #     persistentVolumeClaim:
+      #       claimName: spotlight/pg-data-pvc
 status: {}
