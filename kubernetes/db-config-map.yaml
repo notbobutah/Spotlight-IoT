@@ -20,7 +20,7 @@ metadata:
   name: config-files
   namespace: spotlight
   resourceVersion: "536004"
-  selfLink: /api/v1/namespaces/default/configmaps/config-files
+  selfLink: /home/rob/development/Spotlight-IoT-GCP/database/data
   uid: 314a5692-987e-4aed-97cf-77615e7812e3
 
 
