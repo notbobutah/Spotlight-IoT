@@ -13,5 +13,3 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
   \connect $APP_DB_NAME $APP_DB_USER
   SELECT * from pg_hba_file_rules WHERE type = 'host' and address = '127.0.0.1';
 EOSQL
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" -a -f ../be/src/data/spotlight.data.sql <<-EOSQL
-EOSQL
