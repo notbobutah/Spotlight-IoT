@@ -38,7 +38,7 @@ spec:
               value: spotlight
             - name: POSTGRES_USER
               value: postgres
-          image: ghcr.io/notbobutah/spotlight-iot-db:main
+          image: ghcr.io/notbobutah/spotlight-iot-db:latest
           imagePullPolicy: Always
           # livenessProbe:
           #   exec:

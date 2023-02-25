@@ -34,7 +34,7 @@ services:
         SPOTLIGHT-BE: spotlight-spotlight-be_1
 
   db:
-    image: postgres:12
+    image: ghcr.io/notbobutah/spotlight-iot-db:latest
     container_name: spotlight-db  # Container name
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
