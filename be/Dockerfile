@@ -1,4 +1,7 @@
 FROM node:10
+RUN apt-get update
+RUN apt-get install -y postgresql-client vim
+
 WORKDIR /usr/app
 COPY src/package*.json ./
 RUN npm install
