@@ -83,11 +83,8 @@ services:
     image: ghcr.io/notbobutah/spotlight-iot-pi:latest
     container_name: pi
     ports:
-      - "80:80"
+      - "80:90"
     environment:
-      - POSTGRES_USER=postgresryankurte/docker-rpi-emu
-      - POSTGRES_PASSWORD=spotlight
-      - POSTGRES_DB=postgres
       - APP_DB_USER=thingsboard
       - APP_DB_PASS=spotlight
       - APP_DB_NAME=thingsboard 

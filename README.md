@@ -10,10 +10,10 @@ This is a diagram of this projects deployment structure created using the diagra
 
 
 ### The intent of this project is based in the following simplistic requirements:
-1. Implement opensource React diagramming project as the front-end
+1. Include React diagramming tool as front-end
 2. Include nodejS RESTful API back-end from previous project
 3. Integrate the ThingsBoard IoT management platform
-4. Implement a Raspberry Pi psuedo device in a virtual machine
+4. Implement a Raspberry Pi pseudo device in a virtual machine
 5. Deploy cluster in docker-compose for local cluster operations
 6. Deploy entire project to Google Docker or Kubernetes Engine via Github actions
 7. Register a Raspberry Pi Device
@@ -29,9 +29,10 @@ The first task is to create the project structure and include the components men
 
 2. Copied RESTful server from previous Spotlight project into be directory  
 3. Created thingsboard directory to provide for init.sh to initialize database
-4. Using docker image https://hub.docker.com/r/ryankurte/docker-rpi-emu/ - image starts correctly but has no running function and exits immediately, this is expected until later in the process.
+4. Create pi directory to build docker image https://hub.docker.com/r/lukechilds/dockerpi - init script starts an endless loop that attempts to call the registration url or telemetry url in thingsboard API every ten minutes.
+5. create database directory to build docker image for postgres db allowing for extension of the image. 
 
-#### Proof of life:
+#### Proof of life in docker compose:
 ```
 c3a6b86109ae    Up 2 minutes    spotlight-fe
 18175db41b04    Up 2 minutes    thingsboard
@@ -41,7 +42,7 @@ c3a6b86109ae    Up 2 minutes    spotlight-fe
 
 The log file for this run can be found in the docs directory with timestamp.
 
-After working on the environment to configure docker to use the docker provider inside minikube so that local images could be found without reaching out to an image repository the deploy.sh produced the following cluster deployment
+After working on the environment to configure docker to use the docker provider inside minikube so that local images could be found without reaching out to an image repository the deploy.sh produced the following cluster deployment. Later on in the process we move to the container image registry in github at ghcr.io.
 
 ```
 kubectl get pods
@@ -66,7 +67,7 @@ visit localhost:8080 for the RESTful API swagger page.
 visit localhost:80 to view the diagram editor.
 
 ### Kubernetes
-The project contains a kubernetes directory filled with resource descriptor files that create a deployment in a configured Kubernetes environment, the development effort used minikube as the local kubernetes. In the directory there is a deploy.sh script that calls kubectl to deploy the resources files and expose the ports. 
+The project contains a kubernetes directory filled with resource descriptor files that create a deployment in a configured Kubernetes environment, the development effort used minikube as the local kubernetes. In the directory there is a deploy.sh script that calls kubectl to deploy the resources files and configure the cluster. 
 
 ```
 ./deploy.sh
@@ -103,9 +104,10 @@ spotlight-fe-66ff57df9b-j7wbj   1/1     Running   0          71m
 tb-84649f7878-jrktr             1/1     Running   0          61s
 ```
 
+### Github Actions
+The docker.yaml file in the workflow folder of .github contains multiple sections, one for each deployed docker container. The containers are upload to ghcr.io using a combination of the repository name and the component initials. spotlight-iot-db as an example. These images are then publicly accessible and can be used for deployment in the configured kubernetes cluster inside GKE.
 
-## Caveats
-The current deployment to GKE is not working due to not have a configured image registry accessible to GKE to pull images from.
+Github actions is not currently automatically deploying to GKE although the workflow file exists, this is intentional to avoid deployment problems related to repository events.
 
 ### Thingsboard Docs
 #### User Manual
