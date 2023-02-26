@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   connectors.init({
-    conectorbody: DataTypes.JSON,
+    connectorbody: DataTypes.JSON,
     sourcenode: DataTypes.BIGINT,
     targetnode: DataTypes.BIGINT
   }, {
