@@ -47,7 +47,7 @@ services:
       - db-data:/var/lib/postgresql/data      
       - ./thingsboard:/docker-entrypoint-initdb.d/
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=postgresryankurte/docker-rpi-emu
       - POSTGRES_PASSWORD=spotlight
       - POSTGRES_DB=postgres
       - APP_DB_USER=thingsboard
@@ -80,8 +80,17 @@ services:
       SPRING_DATASOURCE_PASSWORD: spotlight
 
   pi:
-    image: ryankurte/docker-rpi-emu
+    image: ghcr.io/notbobutah/spotlight-iot-pi:latest
     container_name: pi
+    ports:
+      - "80:80"
+    environment:
+      - POSTGRES_USER=postgresryankurte/docker-rpi-emu
+      - POSTGRES_PASSWORD=spotlight
+      - POSTGRES_DB=postgres
+      - APP_DB_USER=thingsboard
+      - APP_DB_PASS=spotlight
+      - APP_DB_NAME=thingsboard 
 
 volumes:
   db-data:

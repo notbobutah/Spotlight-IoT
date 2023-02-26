@@ -6,10 +6,11 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}-be
+  IMAGE_NAME: ${{ github.repository }}
   BE_IMAGE_NAME: ${{ github.repository }}-be
   FE_IMAGE_NAME: ${{ github.repository }}-fe
   DB_IMAGE_NAME: ${{ github.repository }}-db
+  PI_IMAGE_NAME: ${{ github.repository }}-pi
 
 jobs:
   build-and-push-image:
@@ -79,3 +80,20 @@ jobs:
           push: true
           tags: ${{ steps.dbmeta.outputs.tags }}
           labels: ${{ steps.dbmeta.outputs.labels }}
+
+      - name: Extract metadata for PI Docker
+        id: pimeta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.PI_IMAGE_NAME }}
+          tags: |
+             type=ref,event=tag
+             latest
+
+      - name: Build and push Docker image for PI
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./pi
+          push: true
+          tags: ${{ steps.pimeta.outputs.tags }}
+          labels: ${{ steps.pimeta.outputs.labels }}

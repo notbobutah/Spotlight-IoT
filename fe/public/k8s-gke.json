@@ -81,7 +81,7 @@
                         "ports": [
                             {
                                 "containerPort": 5432,
-                                "protocol": "TCP"
+                                "protocol": "TCP"tb UI
                             }
                         ],
                         "resources": {},
