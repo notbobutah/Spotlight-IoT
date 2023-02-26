@@ -1,0 +1,101 @@
+version: "3"
+services:
+  be:
+    container_name: spotlight-be  # Container name
+    image: ghcr.io/notbobutah/spotlight-iot-be:latest
+    pull_policy: always
+    networks:
+      - default
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: spotlight
+      POSTGRES_DB: postgres
+      POSTGRES_SERVER: spotlight-db
+      POSTGRES_PORT: 5432
+      DATABASE_URL: postgres://postgres:spotlight@spotlight-db:5432/postgres
+      NODE_ENV: test
+      PORT: 8080
+    ports:
+      - "8080:8080"
+  fe: 
+      container_name: spotlight-fe  # Container name
+      image: ghcr.io/notbobutah/spotlight-iot-fe:latest
+      pull_policy: always
+      ports: 
+        - '80:3000' # Port mapping
+      depends_on:
+        - be
+      environment:
+        SPOTLIGHT-BE: spotlight-spotlight-be_1
+
+  db:
+    container_name: spotlight-db  # Container name
+    image: ghcr.io/notbobutah/spotlight-iot-db:latest
+    pull_policy: always
+    networks:
+      - default
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data      
+      - ./thingsboard:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=spotlight
+      - POSTGRES_DB=postgres
+      - APP_DB_USER=thingsboard
+      - APP_DB_PASS=spotlight
+      - APP_DB_NAME=thingsboard 
+
+  tb:
+    image: thingsboard/tb
+    container_name: thingsboard
+    ports:
+      - "9090:9090"
+      - "1883:1883"
+      - "7070:7070"
+      # - "5432:5432"
+      - "5683-5683:5683-5683/udp"
+    links:
+      - "db:database"
+    depends_on:
+      - db
+    volumes:
+      - tb-data:/home/rob/.mytb-data/tb-data      
+      - tb-logs:/home/rob/.mytb-data/tb-logs         
+    environment:
+      POSTGRES_USER: thingsboard
+      POSTGRES_PASSWORD: spotlight
+      POSTGRES_DB: thingsboard
+      SPRING_DATASOURCE_URL: jdbc:postgresql://spotlight-db:5432/thingsboard
+      SPRING_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_USERNAME: thingsboard
+      SPRING_DATASOURCE_PASSWORD: spotlight
+
+  pi:
+    image: ghcr.io/notbobutah/spotlight-iot-pi:latest
+    container_name: spotlight-pi
+    pull_policy: always
+    profiles:
+      - pi
+    ports:
+      - "90:90"
+    environment:
+      - APP_DB_USER=thingsboard
+      - APP_DB_PASS=spotlight
+      - APP_DB_NAME=thingsboard 
+
+volumes:
+  db-data:
+    driver: local
+  tb-data:
+    driver: local
+  tb-logs:
+    driver: local        
+  thingsboard:
+    driver: local
