@@ -1,5 +1,7 @@
 #!/bin/bash
 
+env
+
 pg_uri="postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_SERVER:5432/postgres"
 # make sure pg is ready to accept connections
 until pg_isready -h $POSTGRES_SERVER -p 5432 -U postgres
