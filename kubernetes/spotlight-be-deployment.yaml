@@ -25,14 +25,11 @@ spec:
         io.kompose.service: spotlight-be
     spec:
       containers:
-        - args:
-            - npm
-            - start
-          env:
+        - env:
             - name: DATABASE_URL
               value: jdbc:postgresql://${DB_SERVICE_HOST}:${DB_SERVICE_PORT}/postgres
             - name: NODE_ENV
-              value: production
+              value: test
             - name: PORT
               value: "8080"
             - name: POSTGRES_DB
@@ -51,17 +48,5 @@ spec:
           ports:
             - containerPort: 8080
           resources: {}
-          volumeMounts:
-            - mountPath: /app/
-              name: spotlight-be-claim0
-            - mountPath: /app/node_modules
-              name: spotlight-be-claim1
       restartPolicy: Always
-      volumes:
-        - name: spotlight-be-claim0
-          persistentVolumeClaim:
-            claimName: spotlight-be-claim0
-        - name: spotlight-be-claim1
-          persistentVolumeClaim:
-            claimName: spotlight-be-claim1
 status: {}

@@ -2,4 +2,4 @@
 
 npx sequelize db:migrate:all
 npx sequelize db:seed:all
-npm start
+node index.js
