@@ -30,7 +30,7 @@ spec:
             - start
           env:
             - name: DATABASE_URL
-              value: postgres://postgres:spotlight@spotlight-db:5432/postgres
+              value: jdbc:postgresql://${DB_SERVICE_HOST}:${DB_SERVICE_PORT}/postgres
             - name: NODE_ENV
               value: test
             - name: PORT

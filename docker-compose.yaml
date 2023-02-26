@@ -82,6 +82,8 @@ services:
   pi:
     image: ghcr.io/notbobutah/spotlight-iot-pi:latest
     container_name: spotlight-pi
+    profiles:
+      - pi
     ports:
       - "90:90"
     environment:
