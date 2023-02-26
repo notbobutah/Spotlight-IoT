@@ -4,8 +4,9 @@ services:
     container_name: spotlight-be  # Container name
     image: ghcr.io/notbobutah/spotlight-iot-be:latest
     pull_policy: always
-    networks:
-      - default
+    command: /docker-entrypoint-initdb.d/start-be.sh
+    depends_on: 
+      - db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: spotlight
@@ -32,8 +33,6 @@ services:
     container_name: spotlight-db  # Container name
     image: ghcr.io/notbobutah/spotlight-iot-db:latest
     pull_policy: always
-    networks:
-      - default
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
       timeout: 45s
