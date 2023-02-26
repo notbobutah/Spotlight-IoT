@@ -102,12 +102,7 @@ https://demo.thingsboard.io/swagger-ui/#/device-controller/getDeviceCredentialsB
 #### Python script to provisoin new device into thingsboard
  https://github.com/eykamp/birdhouse/blob/master/management/provision.py
 
-The first task is to create the project structure and include the components mentioned above:
-1. React diagramming sample app - decision: use syncfusions demo app not the open source react diagrams.
-         https://github.com/syncfusion/ej2-showcase-react-diagram-builder.git
-   Encountered problems with open source project https://github.com/projectstorm/react-diagrams.git
 
-2. Copied RESTful server from previous Spotlight project into be directory  
-3. Created thingsboard directory to provide for init.sh to initialize database
-4. Create pi directory to build docker image https://hub.docker.com/r/lukechilds/dockerpi - init script starts an endless loop that attempts to call the registration url or telemetry url in thingsboard API every ten minutes.
-5. create database directory to build docker image for postgres db allowing for extension of the image. 
+REST API Calls
+curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram/10'
+curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram'
