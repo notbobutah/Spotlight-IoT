@@ -7,9 +7,9 @@ dotenv.config();
 
 if(process.env.DB_SERVICE_HOST) { 
     process.env.POSTGRES_SERVER=process.env.DB_SERVICE_HOST
-  }
-  console.log('DATABASE_URL:'+process.env.DATABASE_URL); 
-  console.print(process.env);
+    console.log('DATABASE_URL:'+process.env.DATABASE_URL); 
+    console.log(process.env);
+    }
   
 const pool = new Pool({
   user: process.env.POSTGRES_USER,

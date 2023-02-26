@@ -8,9 +8,9 @@ var cors = require('cors')
 
 if(process.env.DB_SERVICE_HOST) { 
   process.env.POSTGRES_SERVER=process.env.DB_SERVICE_HOST
-}
-console.log('DATABASE_URL:'+process.env.DATABASE_URL); 
-console.print(process.env);
+  console.log('DATABASE_URL:'+process.env.DATABASE_URL); 
+  console.log(process.env);
+  }
 var db = require('./utils/db.js')
 
 // removed initdb in favor of sequelize init
