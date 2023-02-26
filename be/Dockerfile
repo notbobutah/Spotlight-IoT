@@ -5,5 +5,8 @@ RUN npm install
 
 COPY src .
 
+RUN npx sequelize db:migrate:all
+RUN npx sequelize db:seed:all
+
 EXPOSE 8080
 CMD [ "npm", "start" ]

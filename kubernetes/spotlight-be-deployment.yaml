@@ -32,7 +32,7 @@ spec:
             - name: DATABASE_URL
               value: jdbc:postgresql://${DB_SERVICE_HOST}:${DB_SERVICE_PORT}/postgres
             - name: NODE_ENV
-              value: test
+              value: production
             - name: PORT
               value: "8080"
             - name: POSTGRES_DB
@@ -46,7 +46,7 @@ spec:
             - name: POSTGRES_USER
               value: postgres
           image: ghcr.io/notbobutah/spotlight-iot-be:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           name: spotlight-be
           ports:
             - containerPort: 8080
