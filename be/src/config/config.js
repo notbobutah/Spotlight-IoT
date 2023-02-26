@@ -2,11 +2,11 @@
 require('dotenv').config();    // don't forget to require dotenv
 const path = require('path');
 
-if(process.env.DB_SERVICE_HOST) { 
-  process.env.POSTGRES_SERVER=process.env.DB_SERVICE_HOST
-  console.log('DATABASE_URL:'+process.env.DATABASE_URL); 
-  console.print(process.env.DB_SERVICE_HOST);
-  }
+// if(process.env.DB_SERVICE_HOST) { 
+//   process.env.POSTGRES_SERVER=process.env.DB_SERVICE_HOST
+//   console.log('DATABASE_URL:'+process.env.DATABASE_URL); 
+//   console.log(process.env.DB_SERVICE_HOST);
+//   }
 
 
 module.exports = {
