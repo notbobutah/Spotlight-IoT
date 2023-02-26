@@ -55,7 +55,7 @@ services:
       - APP_DB_NAME=thingsboard 
 
   tb:
-    image: thingsboard/tb-postgres
+    image: thingsboard/tb
     container_name: thingsboard
     ports:
       - "9090:9090"
@@ -81,9 +81,9 @@ services:
 
   pi:
     image: ghcr.io/notbobutah/spotlight-iot-pi:latest
-    container_name: pi
+    container_name: spotlight-pi
     ports:
-      - "80:90"
+      - "90:90"
     environment:
       - APP_DB_USER=thingsboard
       - APP_DB_PASS=spotlight

@@ -1,5 +1,5 @@
 # Spotlight IoT GCP
-### Current production URLs from GKE on 2-25-2023
+### Current public URLs on GKE on 2-25-2023
 Thingsboard:         http://35.224.156.43:60000/login  http://35.224.156.43:60000/swagger-ui/  
 Diagramming Tool:     http://34.70.25.202:63000/  
 API Service Doc:      http://35.193.168.243:60008/docs/  
@@ -9,7 +9,7 @@ This is a diagram of this projects deployment structure created using the diagra
 ![image info](./docs/spotlight-k8s-diagram.JPG)
 
 
-### The intent of this project is based in the following simplistic requirements:
+### This project is based on the following hypothetical requirements:
 1. Include React diagramming tool as front-end
 2. Include nodejS RESTful API back-end from previous project
 3. Integrate the ThingsBoard IoT management platform
@@ -20,25 +20,7 @@ This is a diagram of this projects deployment structure created using the diagra
 8. Read the cluster details and generate a diagram
 9. Read the device list from Thingsboard and generate a diagram
 
-The motivation for this project is the merging of 2 separate development projects into a single project and its deployment to a usable state in the GCP. Requirements 6,7 and 8 are nice to have but are optional. This README will include a timeline, task list and screen shots of the progress.
-
-The first task is to create the project structure and include the components mentioned above:
-1. React diagramming sample app - decision: use syncfusions demo app not the open source react diagrams.
-         https://github.com/syncfusion/ej2-showcase-react-diagram-builder.git
-   Encountered problems with open source project https://github.com/projectstorm/react-diagrams.git
-
-2. Copied RESTful server from previous Spotlight project into be directory  
-3. Created thingsboard directory to provide for init.sh to initialize database
-4. Create pi directory to build docker image https://hub.docker.com/r/lukechilds/dockerpi - init script starts an endless loop that attempts to call the registration url or telemetry url in thingsboard API every ten minutes.
-5. create database directory to build docker image for postgres db allowing for extension of the image. 
-
-#### Proof of life in docker compose:
-```
-c3a6b86109ae    Up 2 minutes    spotlight-fe
-18175db41b04    Up 2 minutes    thingsboard
-3bb9e1cf8471    Up 2 minutes    spotlight-db
-5ee58ba0be9d    Up 2 minutes    spotlight-be
-```
+The motivation for this project is the merging of 2 separate development projects into a single project and its deployment to a usable state in the GCP. Requirements 6,7 and 8 are nice to have but are optional. This README will include a timeline, task list and screen shots of the progress. 
 
 The log file for this run can be found in the docs directory with timestamp.
 
@@ -109,6 +91,7 @@ The docker.yaml file in the workflow folder of .github contains multiple section
 
 Github actions is not currently automatically deploying to GKE although the workflow file exists, this is intentional to avoid deployment problems related to repository events.
 
+
 ### Thingsboard Docs
 #### User Manual
 https://thingsboard.io/docs/user-guide
@@ -118,3 +101,13 @@ https://demo.thingsboard.io/swagger-ui/#/device-controller/getDeviceCredentialsB
 
 #### Python script to provisoin new device into thingsboard
  https://github.com/eykamp/birdhouse/blob/master/management/provision.py
+
+The first task is to create the project structure and include the components mentioned above:
+1. React diagramming sample app - decision: use syncfusions demo app not the open source react diagrams.
+         https://github.com/syncfusion/ej2-showcase-react-diagram-builder.git
+   Encountered problems with open source project https://github.com/projectstorm/react-diagrams.git
+
+2. Copied RESTful server from previous Spotlight project into be directory  
+3. Created thingsboard directory to provide for init.sh to initialize database
+4. Create pi directory to build docker image https://hub.docker.com/r/lukechilds/dockerpi - init script starts an endless loop that attempts to call the registration url or telemetry url in thingsboard API every ten minutes.
+5. create database directory to build docker image for postgres db allowing for extension of the image. 

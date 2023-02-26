@@ -6,6 +6,7 @@
 
 # echo 'Initializing database for Thingsboard and spotlight - new image'
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+  DROP DATABASE $APP_DB_NAME;
   CREATE USER $APP_DB_USER WITH SUPERUSER PASSWORD '$APP_DB_PASS';
   CREATE DATABASE $APP_DB_NAME;
   GRANT ALL PRIVILEGES ON DATABASE $APP_DB_NAME TO $APP_DB_USER;
