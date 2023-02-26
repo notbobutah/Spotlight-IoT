@@ -9,7 +9,7 @@ var cors = require('cors')
 if(process.env.DB_SERVICE_HOST) { 
   process.env.POSTGRES_SERVER=process.env.DB_SERVICE_HOST
   console.log('DATABASE_URL:'+process.env.DATABASE_URL); 
-  console.log(process.env);
+  console.log(process.env.DB_SERVICE_HOST);
   }
 var db = require('./utils/db.js')
 

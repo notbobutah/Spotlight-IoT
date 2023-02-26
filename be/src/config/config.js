@@ -1,7 +1,6 @@
 
 require('dotenv').config();    // don't forget to require dotenv
 const path = require('path');
-var db = require('./utils/db.js');
 
 if(process.env.DB_SERVICE_HOST) { 
   process.env.POSTGRES_SERVER=process.env.DB_SERVICE_HOST
