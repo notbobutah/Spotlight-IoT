@@ -34,8 +34,9 @@ services:
         SPOTLIGHT-BE: spotlight-spotlight-be_1
 
   db:
-    image: ghcr.io/notbobutah/spotlight-iot-db:latest
     container_name: spotlight-db  # Container name
+    build: ./database
+    image: spotlight-db:latest
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
       timeout: 45s
