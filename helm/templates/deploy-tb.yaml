@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: spotlight
+  name: spotlight-tb
 spec:
   replicas: {{.Values.numReplicas}}
   template:
@@ -10,7 +10,7 @@ spec:
         app: spotlight-iot
     spec:
       containers:
-      - name: spotlight-be
-        image: spotlight-be:v1
+      - name: spotlight-tb
+        image: thingsboard/tb
         ports:
-        - containerPort: {{.Values.fePort}}
+        - containerPort: {{.Values.tbPort}}

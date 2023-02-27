@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: spotlight
+  name: spotlight-db
 spec:
   replicas: {{.Values.numReplicas}}
   template:
@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: spotlight-be
-        image: spotlight-be:v1
+        image: ghcr.io/notbobutah/spotlight-iot-be:latest
         ports:
-        - containerPort: {{.Values.fePort}}
+        - containerPort: {{.Values.dbPort}}

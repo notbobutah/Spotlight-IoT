@@ -1,14 +1,14 @@
-name: thehelmchart
+name: spotlight-iot
 version: 0.1.0
-description: My first helm chart, to manage the multi-containers-deployment node applications
+description: Spotlight helm chart
 keywords:
-  - node docker kubernetes helm tutorial intro
-home: https://github.com/thisisdavidbell/node-docker-kubernetes
+  - node, Java, postgres docker kubernetes helm 
+home: https://github.com/notbobutah/Spotlight-IoT
 sources:
-  - https://github.com/thisisdavidbell/node-docker-kubernetes
+  - https://github.com/notbobutah/Spotlight-IoT
 maintainers: # (optional)
-  - name: David Bell
-    email: thisisdavidbell@hotmail.com
+  - name: Rob MacKay
+    email: rrmackay@gmail.com
 engine: gotpl # The name of the template engine (optional, defaults to gotpl)
 # icon: A URL to an SVG or PNG image to be used as an icon (optional).
 # appVersion: The version of the app that this contains (optional). This needn't be SemVer.
