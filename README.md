@@ -100,17 +100,31 @@ The docker.yaml file in the workflow folder of .github contains multiple section
 Github actions is not currently automatically deploying to GKE although the workflow file exists, this is intentional to avoid deployment problems related to repository events.
 
 
-### Thingsboard Docs
-#### User Manual
+#### Spotlight REST API Calls  
+
+curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram/10'  
+curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram'  
+
+
+## External Project references
+
+### Syncfusion Docs
+the following url is the repository for embedded syncfusion react ui diagramming tool. 
+It is embedded in the project and built separately as the code will be modified to interact with ThingsBoard and the Spotlight REST API eventually. Currently the codebase is the same as in the repo above. Refer to other Spotlight projects for history of shy this library was chosen.  
+https://github.com/syncfusion/ej2-showcase-react-diagram-builder
+
+#### Raspberry PI Emulator
+The reason behind including a PI emulator is to create a virtual IoT device to register with Thingsboard and deliver telemetry data making a fully functional IoT client/server relationship.  
+https://github.com/lukechilds/dockerpi
+
+#### Thingsboard Docs - User Manual
 https://thingsboard.io/docs/user-guide
  
 #### REST API Ref 
 https://demo.thingsboard.io/swagger-ui/#/device-controller/getDeviceCredentialsByDeviceIdUsingGET
 
-#### Python script to provisoin new device into thingsboard
+#### Python script to provision new device into thingsboard
  https://github.com/eykamp/birdhouse/blob/master/management/provision.py
 
 
-REST API Calls
-curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram/10'
-curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram'
+

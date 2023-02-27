@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: spotlight-be
-        image: ghcr.io/notbobutah/spotlight-iot-be:latest
+        image: ghcr.io/notbobutah/spotlight-iot-db:latest
         ports:
         - containerPort: {{.Values.dbPort}}
