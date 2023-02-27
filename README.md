@@ -16,14 +16,21 @@ This is a diagram of this projects deployment structure created using the diagra
 4. Implement a Raspberry Pi pseudo device in a virtual machine
 5. Deploy cluster in docker-compose for local cluster operations
 6. Deploy entire project to Google Docker or Kubernetes Engine via Github actions
-7. Register a Raspberry Pi Device
+7. Register a Raspberry Pi DeviceThe log file for this run can be found in the docs directory with timestamp.
 8. Read the cluster details and generate a diagram
 9. Read the device list from Thingsboard and generate a diagram
 
 The motivation for this project is the merging of 2 separate development projects into a single project and its deployment to a usable state in the GCP. Requirements 6,7 and 8 are nice to have but are optional. This README will include a timeline, task list and screen shots of the progress. 
 
-The log file for this run can be found in the docs directory with timestamp.
+### Task list and timeline
+The file Tasklist.ods is an Open Office spreadhseet with a tab for each day, 
 
+Task List by day: [Thursday](TaskList-23.md)   
+Task List by day: [Friday](TaskList-24.md)   
+Task List by day: [Saturday](TaskList-25.md)   
+Task List by day: [Sunday](TaskList-26.md)   
+
+### Local Kubernetes Deployment to minikube
 After working on the environment to configure docker to use the docker provider inside minikube so that local images could be found without reaching out to an image repository the deploy.sh produced the following cluster deployment. Later on in the process we move to the container image registry in github at ghcr.io.
 
 ```
@@ -34,6 +41,7 @@ spotlight-be-c898f7587-ffgnv    1/1     Running   0          22s
 spotlight-fe-756fb77f6b-bs5xh   1/1     Running   0          24s
 tb-5b75dd5884-9tz5f             1/1     Running   0          21s
 ```
+The log file for this run can be found in the docs directory with timestamp.
 
 ## DevOps deployment choices
 The project has several mechanism to deploy to kubernetes, it does not currently support native deployments to GKE or AWS using non kubernetes descriptors.
