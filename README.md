@@ -1,8 +1,4 @@
 # Spotlight IoT GCP
-### Current public URLs on GKE on 2-25-2023
-Thingsboard:         http://35.224.156.43:60000/login  http://35.224.156.43:60000/swagger-ui/  
-Diagramming Tool:     http://34.70.25.202:63000/  
-API Service Doc:      http://35.193.168.243:60008/docs/  
 
 ## Diagram 
 This is a diagram of this projects deployment structure created using the diagramming tool in this project  
@@ -119,7 +115,14 @@ https://github.com/lukechilds/dockerpi
 
 #### Thingsboard Docs - User Manual
 https://thingsboard.io/docs/user-guide
- 
+
+Developers guide.  
+https://thingsboard.io/docs/getting-started-guides/helloworld/#login-as-a-tenant-administrator
+
+#### Thingsboard Login details  
+Username: tenant@thingsboard.org  
+Password: tenant  
+
 #### REST API Ref 
 https://demo.thingsboard.io/swagger-ui/#/device-controller/getDeviceCredentialsByDeviceIdUsingGET
 
@@ -128,3 +131,7 @@ https://demo.thingsboard.io/swagger-ui/#/device-controller/getDeviceCredentialsB
 
 
 
+### Expired public URLs on GKE on 3-5-2023
+Thingsboard:         http://35.224.156.43:60000/login  http://35.224.156.43:60000/swagger-ui/  
+Diagramming Tool:     http://34.70.25.202:63000/  
+API Service Doc:      http://35.193.168.243:60008/docs/  
