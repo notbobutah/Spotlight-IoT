@@ -48,7 +48,7 @@ services:
       - db-data:/var/lib/postgresql/data      
       - ./thingsboard:/docker-entrypoint-initdb.d/
     environment:
-      - POSTGRES_USER=postgresryankurte/docker-rpi-emu
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=spotlight
       - POSTGRES_DB=postgres
       - APP_DB_USER=thingsboard
