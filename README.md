@@ -1,9 +1,8 @@
 # Spotlight IoT GCP
 
 ## Diagram 
-This is a diagram of this projects deployment structure created using the diagramming tool in this project  
-![image info](./docs/spotlight-k8s-diagram.JPG)
-
+This is a diagram of this projects deployment structure created using LucidChart 
+![image info](./docs/spotlight-k8s-tb-pi-java-node-sm.jpg)
 
 ### This project is based on the following hypothetical requirements:
 1. Include React diagramming tool as front-end
@@ -18,7 +17,7 @@ This is a diagram of this projects deployment structure created using the diagra
 
 The motivation for this project is the merging of 2 separate development projects into a single project and its deployment to a usable state in the GCP. Requirements 6,7 and 8 are nice to have but are optional. This README will include a timeline, task list and screen shots of the progress. 
 
-### Task list and timeline
+### Task list and timeline 
 The file Tasklist.ods is an Open Office spreadhseet with a tab for each day, 
 
 Task List by day: [Thursday](TaskList-23.md)   
@@ -99,7 +98,7 @@ Github actions is not currently automatically deploying to GKE although the work
 #### Spotlight REST API Calls  
 
 curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram/10'  
-curl -X GET --header 'Accept: application/json' 'http://35.193.168.243:60008/api/v1/diagram'  
+curl -X GET --header 'Accept: application/json' 'http://35.193 .168.243:60008/api/v1/diagram'  
 
 
 ## External Project references
@@ -112,6 +111,11 @@ https://github.com/syncfusion/ej2-showcase-react-diagram-builder
 #### Raspberry PI Emulator
 The reason behind including a PI emulator is to create a virtual IoT device to register with Thingsboard and deliver telemetry data making a fully functional IoT client/server relationship.  
 https://github.com/lukechilds/dockerpi
+
+### Thingsboard device registration 
+sample activity sequence diagram of device registration process produced in LucidChart
+![image info](./docs/spotlight-k8s-IoT-reg-seq-sm.jpg)
+
 
 #### Thingsboard Docs - User Manual
 https://thingsboard.io/docs/user-guide
