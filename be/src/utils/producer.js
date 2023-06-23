@@ -7,11 +7,9 @@ const sasl = username && password ? { username, password, mechanism: 'plain' } :
 const ssl = !!sasl
 const topic = 'diagram-node-change'
 
-// This creates a client instance that is configured to connect to the Kafka broker provided by
-// the environment variable KAFKA_BOOTSTRAP_SERVER
 const kafka = new Kafka({
   logLevel: logLevel.DEBUG,
-  brokers: [`broker:9092`, 'broker:9091'],
+  brokers: [`broker:19092`, 'broker:19091'],
   clientId: 'spotlight-producer',
 })
 const prod = kafka.producer();

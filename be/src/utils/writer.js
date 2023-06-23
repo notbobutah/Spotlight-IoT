@@ -32,7 +32,7 @@ var writeJson = exports.writeJson = function(response, arg1, arg2) {
   }
 
   if(!code) {
-    // if no response code given, we default to 200
+    // if no response code given, default to 200
     code = 200;
   }
   if(typeof payload === 'object') {

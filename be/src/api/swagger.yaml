@@ -15,6 +15,23 @@ basePath: "/api/v1"
 schemes:
 - "http"
 paths:
+  /event:
+    get:
+      tags:
+      - "Event"
+      summary: "Send a message to kafka"
+      description: "Send message, no return"
+      operationId: "getEvent"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "Invalid message supplied"
+      x-swagger-router-controller: "Event"
   /diagram:
     get:
       tags:

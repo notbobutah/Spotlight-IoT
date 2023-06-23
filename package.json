@@ -12,7 +12,9 @@
     "stop": "docker-compose down"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  },
   "devDependencies": {
     "sequelize-cli": "^6.5.2",
     "typescript": "~4.8.2"

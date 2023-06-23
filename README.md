@@ -63,7 +63,7 @@ Because the default nginx in minikube uses ephemeral ports to receive the access
 
 
 ### Terraform
-The project contains a terraform directory that currently contains descriptors to create a usable cluster in GKE based on an existing login session. After the terraform process is applied to GKE you can access the cluster by running additional command listed below to enable kubectl access to the cluster and its resources. You environment may vary from this.
+The project contains a terraform directory that currently contains descriptors to create a usable cluster in GKE based on an existing login session. After the terraform process is applied to GKE you can access the cluster by running additional command listed below to enable kubectl access to the cluster and its resources. Your environment may vary from this.
 
 ```
 terraform plan
